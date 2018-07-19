@@ -1,0 +1,26 @@
+<?php
+$note = <<<EOT
+<div id="KevinHelpTips" class = "text-left" >
+	<table align='center' style = "background: #E5E5E5;">
+	  <tr>
+		<td class = "text-left">
+			<h2>Ldap域认证 	方式：</h2>
+			用户tom<br>
+			1. 域用户：tom@abc.com,本地用户tom， 输入 "tom" or "tom@abc.com",  abc.com的域密码<br>
+			2. 域用户: tom@de.abc.com,本地用户tom.de， 输入 "tom.de" or "tom@de.abc.com", de.abc.com的域密码<br>
+			3. 域用户: 无,本地用户tom， 输入tom, 本地密码:<br>
+	   </td>
+	  </tr>
+	  <tr>
+		<td class = "text-left">
+		<h2>*考勤记录不能删除</h2>如果有错误，需要编辑修改日期/时间/项目/内容等，用到到其它将来的日期内。<br>
+		</td>
+	  </tr>
+	</table>
+</div>
+EOT;
+?>
+<script>
+    var appendHTML = <?php echo json_encode($note); ?>;
+    $('#poweredby').after(appendHTML);
+</script>

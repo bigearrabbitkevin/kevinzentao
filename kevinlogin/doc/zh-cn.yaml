@@ -1,0 +1,27 @@
+---
+name: Kevin登录 ldap AD认证 权限
+code: kevinlogin
+type: extension
+copyright: Kevin
+site:
+author: 'kevin<3301647@qq.com>'
+abstract: >
+  ldap登陆劫持
+desc: >
+  ldap登陆劫持
+install: |
+  1. 通过禅道的插件管理来进行安装。
+releases:
+  1.9:
+    charge: free
+    license: ZPL (http://zpl.pub/v1)
+    changelog: 只保留login和logout
+    date: 2018-7-19
+    zentao:
+      compatible: all
+      incompatible:
+    depends:
+      kevindefine:
+        min: 2.0
+        max:
+    conflicts: null

@@ -1,0 +1,30 @@
+---
+name: Kevin 自定义
+code: kevindefine
+type: extension
+copyright: Kevin
+site: 
+author: 'kevin<3301647@qq.com>'
+abstract: >
+  多个Kevin插件模块
+desc: >
+  多个Kevin插件模块
+install: |
+  1. 通过禅道的插件管理来进行安装。
+  2. 手工添加或修改数据库的列，具体见instal.sql
+releases:
+  2.5:
+    charge: free
+    license: ZPL (http://zpl.pub/v1)
+    changelog:
+         1.人员分类级别履历的功能完善
+    date: 2017-12-19
+    zentao:
+      compatible: 8.4.1
+      incompatible:
+    depends:
+    depends:
+      echarts:
+        min: 3.1.10
+        max: 
+    conflicts: null

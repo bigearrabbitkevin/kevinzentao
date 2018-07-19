@@ -1,0 +1,22 @@
+---
+name: Kevin zentao patch
+code: kevinzentaopatch
+type: patch
+copyright: free
+site: 
+author: 'kevin<3301647@qq.com>'
+abstract: Disable - My - Block -Dynamic when no prive of company dynamic
+desc: Disable - My - Block -Dynamic when no prive of company dynamic
+install: |
+  1. Install by zentao plugin
+releases:
+  8.4.1:
+    charge: free
+    license: ZPL (http://zpl.pub/v1)
+    changelog: Disable My Block of Dynamic when no prive of company dynamic
+    date: 2016-12-19
+    zentao:
+      compatible: 8.4.1
+      incompatible:
+    depends: null
+    conflicts: null

@@ -1,0 +1,7 @@
+<?php
+//示例,表格 kevin_classItem对应的分类条目的父类id，通过搜索下级，确定有多少条目
+$config->kevinuser->classID['role']	 	 = 10; 
+$config->kevinuser->classID['class1']	 = 11; 
+$config->kevinuser->classID['class2']	 = 12; 
+$config->kevinuser->classID['class3']	 = 13; 
+$config->kevinuser->classID['worktype']	 = 14; 

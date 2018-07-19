@@ -1,0 +1,22 @@
+---
+name: Kevin 禅道补丁
+code: kevinzentaopatch
+type: patch
+copyright: free
+site: 
+author: 'kevin<3301647@qq.com>'
+abstract: 如果没有组织的动态权限，禁用我的地盘的动态板块
+desc: 如果没有组织的动态权限，禁用我的地盘的动态板块
+install: |
+  1. Install by zentao plugin
+releases:
+  8.4.1:
+    charge: free
+    license: ZPL (http://zpl.pub/v1)
+    changelog: 如果没有组织的动态权限，禁用我的地盘的动态板块
+    date: 2016-12-19
+    zentao:
+      compatible: 8.4.1
+      incompatible:
+    depends: null
+    conflicts: null

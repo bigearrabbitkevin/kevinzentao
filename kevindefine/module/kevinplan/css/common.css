@@ -1,0 +1,20 @@
+.setTable{width:100%;margin-bottom:20px}
+.setTable th
+,.setTable td{padding:3px;line-height:1.42857143;vertical-align:top;border-bottom:1px solid #ddd;-webkit-transition:all .3s cubic-bezier(.175,.885,.32,1);-o-transition:all .3s cubic-bezier(.175,.885,.32,1);transition:all .3s cubic-bezier(.175,.885,.32,1)}
+.setTable>thead>tr>th{vertical-align:bottom;background-color:#f1f1f1;border-bottom:1px solid #ddd}
+.panel panel-sm{height: auto ;}
+table.Date-table{
+	table-layout:fixed;
+	boder:#000 2px solid;
+	width:100%;
+	padding:0px;marign:0px;
+	border-spacing: 0px;
+	border-collapse:separate ;
+}
+table.Date-table td{ 
+	border:#000 1px solid; 
+	vertical-align: top;
+}
+.KevinDivFilter{
+	padding:2px;marign:1px;
+}

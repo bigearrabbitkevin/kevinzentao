@@ -31,24 +31,27 @@
     <form class='form-condensed pdb-20' method='post' target='hiddenwin'>
       <table align='center' class='table table-form'> 
         <?php if($groupUsers):?>
-      <tr >
+        <tr>
+		<!--Start: 区分组内和组外语句。 kevin.-->
           <th class='w-100px' ><?php echo $lang->group->inside;?><?php echo html::selectAll('group', 'checkbox', true);?> </th>
           <td id='group' class='form-control ' size='10' style='height:200px;overflow:auto;' ><?php $i = 1;?>
 			  <div class='w-100px' ><strong><?php echo $group->name.'人员';//echo '科室人员';?></strong><?php echo html::selectAll('indept', 'checkbox', true);?></div>
             <?php foreach($groupUsers as $account => $realname):?>
 			  <div class='group-item' id='indept'><?php if(in_array($account, $deptusers)) echo html::checkbox('members', array($account => $realname), $account);?></div>
-           
+		<!--end: 区分组内和组外语句。 kevin.--> 
             <?php endforeach;?>
+			<!--Start:添加非组内人员循环语句。 kevin.-->
 			  <div class='w-100px' ><strong><?php echo '非'.$group->name.'人员';//echo '非科室人员';?></strong><?php echo html::selectAll('extdept', 'checkbox', true);?></div>
 			 <?php foreach($groupUsers as $account => $realname):?>
 			   <div class='group-item extdept' id='extdept' ><?php if(!in_array($account, $deptusers)) echo html::checkbox('members', array($account => $realname), $account);?></div>
+			<!--end: 添加非组内人员循环语句。 kevin.-->
 			 <?php endforeach;?>
           </td>
         </tr>
         <?php endif;?>
-	
         <tr>
           <th class='w-100px'><?php echo $lang->group->outside;?><?php echo html::selectAll('other','checkbox');?> </th>
+			<!--下面一句：添加高度限制语句 kevin.-->
           <td id='other' class='form-control' size='10' style='height:200px;overflow:auto;'><?php $i = 1;?>
             <?php foreach($otherUsers as $account => $realname):?>
             <div class='group-item'><?php echo html::checkbox('members', array($account => $realname), '');?></div>

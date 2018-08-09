@@ -3,7 +3,9 @@
 //kevin------------------------------------------
 $lang->resource->kevincom		 = new stdclass();
 $lang->resource->kevincom->index = 'index';
+$lang->resource->kevincom->bomcheck = 'bomcheck';
 $lang->kevincom->methodOrder[5]	 = 'index';
+$lang->kevincom->methodOrder[10]	 = 'bomcheck';
 
 //kevindefine------------------------------------------
 $lang->resource->kevindefine = new stdclass();
@@ -471,6 +473,13 @@ $lang->resource->kevinuser->deptBatchDelete = 'deptBatchDelete';
 $lang->resource->kevinuser->deptlist	 = 'deptlist';
 $lang->resource->kevinuser->deptset	 = 'deptset';
 $lang->resource->kevinuser->deletedeptuser	 = 'deletedeptuser';
+$lang->resource->kevinuser->browse	 = 'browse';
+$lang->resource->kevinuser->userbatchedit	 = 'userbatchedit';
+$lang->resource->kevinuser->manageContacts	 = 'manageContacts';
+
+$lang->resource->kevinuser->create	 = 'create';
+$lang->resource->kevinuser->edit	 = 'edit';
+$lang->resource->kevinuser->batchcreate	 = 'batchcreate';
 
 
 $lang->kevinuser->methodOrder[9]	 = 'index';

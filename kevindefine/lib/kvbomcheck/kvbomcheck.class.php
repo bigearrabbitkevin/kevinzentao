@@ -7,52 +7,79 @@
  */
 class kvbomcheck
 {
-	public $auto = 1;
-
-
+	public $AutoRemoveBom = '1'; //auto remove ,'1' or '0'
+	public $BomFileList = array(); //file list
+	public $CountChecked = 0; //checked count for one time check
+	
+	/**
+	 * Initial.
+	 *
+	 * @access public
+	 * @return void
+	 */
+	public function Initial() {
+		$this->AutoRemoveBom = 1;
+		$this->BomFileList = array();
+		$this->CountChecked = 0;
+	}
+	
+	/**
+	 * checkdir.
+	 *
+	 * @access public
+	 * @param  string $basedir file directory
+	 * @return void
+	 */
 	public function checkdir($basedir) {
 		if ($dh = opendir ( $basedir )) {
-			$html = "<div style='margin: 20px 0 0 50px;'>";
-			$str = "";
 			while ( ($file = readdir ( $dh )) !== false ) {
-				if ($file != '.' && $file != '..') {
-					if (! is_dir ( $basedir . "/" . $file )) { // ������ļ�
-						$res = $this->checkBOM ( "$basedir/$file" );
-						if(!empty($res))
-							$str .= "<p>filename: $basedir/$file " . $res . " <br></p>";
-					} else {
-						$dirname = $basedir . "/" .$file; // �����Ŀ¼
-						$this->checkdir ( $dirname ); // �ݹ�
-					}
+				if ($file == '.' || $file == '..' || $file == '.svn') continue;
+				if (! is_dir ( $basedir . "/" . $file )) { // base folder
+					$res = $this->checkBOM ( "$basedir/$file" );
+				} else {
+					$dirname = $basedir . "/" .$file; // filename
+					$this->checkdir ( $dirname ); // check
 				}
 			}
-//			if(empty($str)) $str = "没有检测到有BOM头的文件";
-			$html = $html. $str. "</div>";
-			echo $html;
 			closedir ( $dh );
 		}
 	}
 
+	/**
+	 * checkBOM for one file.
+	 *
+	 * @access public	
+	 * @param  string $filename file path
+	 * @return void
+	 */	
 	public function checkBOM($filename) {
-		global $auto;
 		$contents = file_get_contents ( $filename );
+		$this->CountChecked ++;
 		$charset [1] = substr ( $contents, 0, 1 );
 		$charset [2] = substr ( $contents, 1, 1 );
 		$charset [3] = substr ( $contents, 2, 1 );
-		if (ord ( $charset [1] ) == 239 && ord ( $charset [2] ) == 187 && ord ( $charset [3] ) == 191) { // BOM ��ǰ�����ַ���ASCII ��ֱ�Ϊ 239 187 191
-			if ($auto == 1) {
+		if (ord ( $charset [1] ) == 239 && ord ( $charset [2] ) == 187 && ord ( $charset [3] ) == 191) { // 
+			$this->BomFileList[] = $filename ;//save list
+			if ($this->AutoRemoveBom == 1) {
 				$rest = substr ( $contents, 3 );
 				$this->rewrite ( $filename, $rest );
-				return ("<font color=red>BOM found, automatically removed.</font>");
+				return 2;
 			} else {
-				return ("<font color=red>BOM found.</font>");
+				return 1;
 			}
-		} else
-			return "";
-//			return ("BOM Not Found.");
+		} 
+		return 0;
 	}
 
-	public function rewrite($filename, $data) {
+	/**
+	 * rewrite bom file.
+	 *
+	 * @access public
+	 * @param  string $filename file path
+	 * @param  string $data file contents
+	 * @return void
+	 */	
+	public function rewrite($filename, &$data) {
 		$filenum = fopen ( $filename, "w" );
 		flock ( $filenum, LOCK_EX );
 		fwrite ( $filenum, $data );

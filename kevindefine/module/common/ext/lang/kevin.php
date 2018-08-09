@@ -72,9 +72,10 @@ $lang->menugroup->kevinhours	 = 'kevinhours';
 $lang->menugroup->kevinhoursb	 = 'kevinhours';
 
 //--Plugin------kevincom------------------------------
-//$lang->kevincom->menu->index	 = 'KEVIN插件|kevincom|index';
+$lang->kevincom->menu->index	 = 'KEVIN插件|kevincom|index';
+$lang->kevincom->menu->bomcheck	 = 'Bom检查|kevincom|bomcheck';
 
-//$lang->kevincom->menuOrder[10]	 = 'index';
+$lang->kevincom->menuOrder[10]	 = 'index';
 
 
 //kevinhours menu ---------------------------------------
@@ -271,11 +272,14 @@ $lang->kevinclass->menuOrder[30] = 'help';
 $lang->kevinuser					 = new stdclass();
 $lang->kevinuser->menu				 = new stdclass();
 $lang->kevinuser->menu->index		 = '首页|kevinuser|index';
-$lang->kevinuser->menu->kevinbrowse	 = '用户.K|kevinhours|browse';
+$lang->kevinuser->menu->kevinbrowse	 = '用户.K|kevinuser|browse';
 $lang->kevinuser->menu->classlist	 = '级别列表|kevinuser|classlist';
 $lang->kevinuser->menu->recordlist	 = '人员履历列表|kevinuser|recordlist';
 $lang->kevinuser->menu->deptlist	 = '部门列表|kevinuser|deptlist';
 $lang->kevinuser->menu->deptset	 = '部门指定|kevinuser|deptset';
+$lang->kevinuser->menu->batchAddUser = array('link' => '<i class="icon-plus-sign"></i>&nbsp;批量添加|kevinuser|batchCreate|dept=%s', 'subModule' => 'kevinuser', 'float' => 'right');
+$lang->kevinuser->menu->addUser      = array('link' => '<i class="icon-plus"></i>&nbsp;添加用户|kevinuser|create|dept=%s', 'subModule' => 'kevinuser', 'float' => 'right');
+
 
 //menu list
 $lang->kevinlogin					 = new stdclass();

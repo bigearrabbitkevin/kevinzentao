@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 //权限相关
 $lang->kevinstore->common	 = '仓库';
 $lang->kevinstore->index	 = '首页';

@@ -398,7 +398,7 @@ class kevinuserModel extends model {
 		$this->dao->update(TABLE_DEPT)
 			->data($dept)
 			->autoCheck()
-			->batchCheck('parent,name,order', 'notempty')
+			->batchCheck('name,order', 'notempty')
 			->where('id')
 			->eq($id)
 			->exec();

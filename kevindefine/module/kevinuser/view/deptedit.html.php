@@ -26,7 +26,7 @@
             <table align='center' class='table table-form'> 
                 <tr>
                     <th class='w-80px'><?php echo $lang->kevinuser->deptParent;?></th>
-                    <td><div class="required required-wrapper" style="line-height: 30px;padding-left: 35px;"></div><?php echo html::select('parent', $optionMenu, isset($dept->parent)?$dept->parent:'', "class='form-control chosen'");?></td>
+                    <td><div class="" style="line-height: 30px;padding-left: 35px;"></div><?php echo html::select('parent', $optionMenu, isset($dept->parent)?$dept->parent:'', "class='form-control chosen'");?></td>
                 </tr>
                 <tr>
                     <th class='w-80px'><?php echo $lang->kevinuser->deptName;?></th>

@@ -9,7 +9,7 @@ $config->kevinuser->edit->requiredFields	 = 'role,worktype,classify1,classify2,c
 
 $config->kevinuser->classBatchEditFields	 = 'role,worktype,classify1,classify2,classify3,classify4,payrate,hourFee,start,end,jobRequirements,remarks';
 $config->kevinuser->recordBatchEditFields	 = 'account,realname,class,worktype,start,end';
-$config->kevinuser->deptBatchEditFields		 = 'name,parent,path,group,grade,order,manager,email,code';
+$config->kevinuser->deptBatchEditFields		 = 'name,path,group,grade,order,manager,email,code';
 
 $config->kevinuser->lockMinutes	 = 10;
 $config->kevinuser->batchEditNum	 = 5;

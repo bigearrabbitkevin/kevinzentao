@@ -432,7 +432,19 @@ class kevincomModel extends model
             $link   = commonModel::createMenuLink($menuItem);
             echo "<li $active data-id='$menuItem->name'><a href='$link' $active>$menuItem->text</a></li>\n";
         }
-		echo "<li data-id='myhome' class = 'myhome custom-item'>".html::a(helper::createLink('my', 'index'), '<i class="icon-home"></i>')."</li>\n";       
+        echo "<li data-id='myhome' class = 'pull-right myhome'>".html::a(helper::createLink('my', 'index'), '<i class="icon-home"></i>')."</li>\n";
+        echo "<li data-id='myhome' class = 'pull-right myhome'>". html::a('#', "<i class='icon-user'></i> " . $app->user->realname )."</li>\n";
+
+        $isGuest = $app->user->account == 'guest';
+        $logurl = '';
+        if($isGuest)   {
+            $logurl = html::a(helper::createLink('user', 'login'), $lang->login);
+        }
+        else        {
+            $logurl = html::a(helper::createLink('user', 'logout'), $lang->logout);
+        }
+        echo "<li data-id='myhome' class = 'pull-right myhome'>". $logurl ."</li>\n";
+
         echo "</ul>\n";
     }
 

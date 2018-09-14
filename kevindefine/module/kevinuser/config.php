@@ -11,6 +11,12 @@ $config->kevinuser->classBatchEditFields	 = 'role,worktype,classify1,classify2,c
 $config->kevinuser->recordBatchEditFields	 = 'account,realname,class,worktype,start,end';
 $config->kevinuser->deptBatchEditFields		 = 'name,path,group,grade,order,manager,email,code';
 
+$config->kevinuser->customBatchCreateFields = 'dept,deptdispatch,email,gender,commiter,join,skype,qq,yahoo,gtalk,wangwang,mobile,phone,address,zipcode';
+
+$config->kevinuser->custom = new stdclass();
+$config->kevinuser->custom->batchCreateFields = 'dept,deptdispatch,email,gender';
+$config->kevinuser->custom->batchEditFields   = 'dept,deptdispatch,join,email,commiter';
+
 $config->kevinuser->lockMinutes	 = 10;
 $config->kevinuser->batchEditNum	 = 5;
 $config->kevinuser->batchCreate	 = 10;

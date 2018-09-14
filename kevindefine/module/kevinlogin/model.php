@@ -57,9 +57,12 @@ class kevinloginModel extends model {
 		return $pwds;
 	}
 
-	public function getDomainAccounts($pager = null) {
+	public function getDomainAccounts($pager = null, $filter) {
 		$ldapusers = $this->dao->select('id,account,realname,domainFullAccount')->from(TABLE_USER)
 				->where('domainFullAccount')->ne('')
+				->beginIF(!empty($filter) && !empty($filter['realname']))->andWhere('realname')->like('%'.$filter['realname'].'%')->FI()
+				->beginIF(!empty($filter) && !empty($filter['localname']))->andWhere('account')->like('%'.$filter['localname'].'%')->FI()
+				->beginIF(!empty($filter) && !empty($filter['remotename']))->andWhere('domainFullAccount')->like('%'.$filter['remotename'].'%')->FI()
 				->orderBy('account')
 				->page($pager)
 				->fetchAll();

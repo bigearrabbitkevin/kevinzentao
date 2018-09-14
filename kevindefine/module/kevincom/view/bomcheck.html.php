@@ -11,19 +11,27 @@ if($_POST) {
 	$isPost = 1;
 	if (isset ( $_POST ['dir'] )) { //config the basedir
 		$basedir = $_POST ['dir'];
+		if(!empty($basedir))  $this->session->set('bomCheckDir', $basedir);
 	} 
 	if (isset ( $_POST ['AutoRemoveBom'] )) { //config the basedir
 		$AutoRemoveBom = $_POST ['AutoRemoveBom'];
 		$AutoRemoveBom = ($AutoRemoveBom == '1'? '1':'0');
-	} 
+	}
+
+	if(empty($basedir) && isset($_SESSION['bomCheckDir'])) $basedir = $_SESSION['bomCheckDir'];
 }
  ?>		
 <div class='main text-left' style="overflow:auto; ">
+	<div class="card-heading">
+		<h4 class="mg-0">Bom检查插件的使用说明 </h4>
+	</div>
+	<div class="card-content text-muted">1、在输入框输入检查的路径。<br> 2、勾选检查或者移除选项。<br>3、点击提交按钮查询出有Bom头的文件，如果前面勾选移除选项则移除Bom头。  </div>
+	<br>
 	<form method='post' id='uploadForm'>
 		<table class="table active-disabled">
 			<tbody>
 			<tr class="search-field ">
-				<td class="text-right w-150px">请输入要检测的路径</span>
+				<td class="text-right w-150px">请输入路径</span>
 				</td>
 				<td class="w-auto"><?php echo html::input("dir", $basedir, "class='form-control' placeholder = 'Server Folder ,Not local Folder'"); ?></td>
 

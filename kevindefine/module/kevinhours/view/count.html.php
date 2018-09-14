@@ -44,7 +44,7 @@ $printovertablePriv  = common::hasPriv('kevinhours', 'printovertable');
 						<?php if ($checkAllPriv || $browseDeptHoursPriv) { ?>
 							<tr>
 								<th><?php echo $lang->kevinhours->hoursscope; ?></th>
-								<td style="max-width: 189px;"><?php echo html::select('employeetype', $lang->kevinhours->employeeTypeList, $employeetypeIndex, "class='form-control chosen' style='width:180px'"); ?></td>
+								<td style="max-width: 189px;"><?php echo html::select('employeetype', $lang->kevinhours->employeeTypeList, isset($employeetypeIndex)?$employeetypeIndex:'', "class='form-control chosen' style='width:180px'"); ?></td>
 							</tr>
 						<?php } ?>
 
@@ -70,9 +70,9 @@ $printovertablePriv  = common::hasPriv('kevinhours', 'printovertable');
 						<tr>
 							<td class='text-center'><?php echo html::checkbox('isIncludeAnn', $lang->kevinhours->isIncludeAnn, $this->session->isIncludeAnn, ''); ?></td>
 						</tr>
-						<tr>
-							<td colspan="2" class='text-center'><?php echo html::submitButton("提交"); ?></td>
-						</tr>
+<!--						<tr>-->
+<!--							<td colspan="2" class='text-center'>--><?php //echo html::submitButton("提交"); ?><!--</td>-->
+<!--						</tr>-->
 					</table>
 				</form>
 			</div>
@@ -87,7 +87,7 @@ $printovertablePriv  = common::hasPriv('kevinhours', 'printovertable');
 <?php include '../../kevincom/view/footer.html.php'; ?>
 <script>
 	$(document).ready(function () {
-		var deptId = "<?php echo $deptIndex ?>";
+		var deptId = "<?php echo isset($deptIndex)?$deptIndex:'' ?>";
 		getEmployee(deptId)
 	});
 </script>

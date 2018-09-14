@@ -24,7 +24,7 @@ $lang->kevinlogin->ldapDomain		 = "域认证";
 $lang->kevinlogin->serialNum		 = '序号';
 $lang->kevinlogin->PasswordSource	 = '密码源码';
 $lang->kevinlogin->PasswordMd5		 = 'Md5码';
-
+$lang->kevinlogin->filter            = '过滤';
 //界面翻译
 $lang->kevinlogin->confirmLock	 = "您确定锁定该用户吗？";
 $lang->kevinlogin->confirmUnlock = "您确定解除该用户的锁定状态吗？";

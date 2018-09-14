@@ -13,13 +13,16 @@ class kevinhours extends control {
 
 	public function ajaxDeptEmployees($deptId) {
 		//获取当前部门下所有用户，并根据内部和外协进行分组
+		$html = '';
+		$deptId = (int)$deptId;
+		if(empty($deptId) || $deptId < 1) die($html);
 		$this->kevinhours->getDeptEmployeesPairs($deptId);
 		$checkAllPriv        = common::hasPriv('kevinhours', 'checkAll');
 		$browseDeptHoursPriv = common::hasPriv('kevinhours', 'browseDeptHours');
 		$dispatchedPriv      = common::hasPriv('kevinhours', 'dispatched');
 		$printoverPriv       = common::hasPriv('kevinhours', 'printover');
 		$printovertablePriv  = common::hasPriv('kevinhours', 'printovertable');
-		$html = '';
+		
 		$employeesAll	 = $this->kevinhours->employeesAll;
 		$j=0;
 		$html .= "<div class='pull-left' style='width: 45%;margin-left: 8%;'><table class='table table-condensed  table-hover'>";

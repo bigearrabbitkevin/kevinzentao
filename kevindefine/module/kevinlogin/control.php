@@ -57,11 +57,21 @@ class kevinlogin extends control {
 	}
 
 	public function domainaccount($recTotal = 0, $recPerPage = 10, $pageID = 1) {
+		$filter = [];
 		if (!empty($_POST)) {
-			$this->kevinlogin->updateDefaultLdapusers();
-			$vars = array('$recTotal' => $recTotal, '$recPerPage' => $recPerPage, '$pageID' => $pageID);
-			die(js::locate($this->createLink('kevinlogin', 'domainaccount', $vars), 'parent'));
+			$post = $_POST;
+			if(isset($post['realname']) || isset($post['localname']) || isset($post['remotename'])) {
+				if(isset($post['realname'])) $filter['realname'] = $post['realname'];
+				if(isset($post['localname'])) $filter['localname'] = $post['localname'];
+				if(isset($post['remotename'])) $filter['remotename'] = $post['remotename'];
+				$this->session->set('domainaccount_filter', $filter);
+			}else{
+				$this->kevinlogin->updateDefaultLdapusers();
+				$vars = array('$recTotal' => $recTotal, '$recPerPage' => $recPerPage, '$pageID' => $pageID);
+				die(js::locate($this->createLink('kevinlogin', 'domainaccount', $vars), 'parent'));
+			}
 		}
+		if(empty($filter) && $_SESSION['domainaccount_filter']) $filter = $_SESSION['domainaccount_filter'];
 		$this->domainaccountCorrect();
 		/* Load pager. */
 		$this->app->loadClass('pager', $static			 = true);
@@ -71,9 +81,10 @@ class kevinlogin extends control {
 
 		$this->view->title			 = $this->lang->kevinlogin->common . $this->lang->colon . $this->lang->kevinlogin->domainaccount;
 		$this->view->position[]		 = $this->lang->kevinlogin->domainaccount;
-		$this->view->domainaccounts	 = $this->kevinlogin->getDomainAccounts($pager);
+		$this->view->domainaccounts	 = $this->kevinlogin->getDomainAccounts($pager, $filter);
 		$this->view->pager			 = $pager;
 		$this->view->controlType	 = 'domainaccount';
+		$this->view->filter = $filter;
 		$this->display();
 	}
 

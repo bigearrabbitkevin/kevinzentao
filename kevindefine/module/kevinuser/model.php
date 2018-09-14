@@ -16,6 +16,113 @@
 class kevinuserModel extends model {
 	
 	/**
+	 * Set menu.
+	 *
+	 * @param  int    $dept
+	 * @access public
+	 * @return void
+	 */
+	public function setMenu($dept = 0)
+	{
+		common::setMenuVars($this->lang->kevinuser->menu, 'addUser', array($dept));
+		common::setMenuVars($this->lang->kevinuser->menu, 'batchAddUser', array($dept));
+	}
+	
+	/**
+	 * Batch create users.
+	 *
+	 * @param  int    $users
+	 * @access public
+	 * @return void
+	 */
+	public function batchCreate()
+	{
+		if(empty($_POST['verifyPassword']) or md5($this->post->verifyPassword) != $this->app->user->password) die(js::alert($this->lang->user->error->verifyPassword));
+		
+		$users    = fixer::input('post')->get();
+		$data     = array();
+		$accounts = array();
+		for($i = 0; $i < $this->config->user->batchCreate; $i++)
+		{
+			if($users->account[$i] != '')
+			{
+				$account = $this->dao->select('account')->from(TABLE_USER)->where('account')->eq($users->account[$i])->fetch();
+				if($account) die(js::error(sprintf($this->lang->user->error->accountDupl, $i+1)));
+				if(in_array($users->account[$i], $accounts)) die(js::error(sprintf($this->lang->user->error->accountDupl, $i+1)));
+				if(!validater::checkAccount($users->account[$i])) die(js::error(sprintf($this->lang->user->error->account, $i+1)));
+				if($users->realname[$i] == '') die(js::error(sprintf($this->lang->user->error->realname, $i+1)));
+				if($users->email[$i] and !validater::checkEmail($users->email[$i])) die(js::error(sprintf($this->lang->user->error->mail, $i+1)));
+				$users->password[$i] = (isset($prev['password']) and $users->ditto[$i] == 'on' and empty($users->password[$i])) ? $prev['password'] : $users->password[$i];
+				if(!validater::checkReg($users->password[$i], '|(.){6,}|')) die(js::error(sprintf($this->lang->user->error->password, $i+1)));
+				$role = $users->role[$i] == 'ditto' ? (isset($prev['role']) ? $prev['role'] : '') : $users->role[$i];
+				
+				$data[$i] = new stdclass();
+				$data[$i]->dept     = $users->dept[$i] == 'ditto' ? (isset($prev['dept']) ? $prev['dept'] : 0) : $users->dept[$i];
+				$data[$i]->account  = $users->account[$i];
+				$data[$i]->realname = $users->realname[$i];
+				$data[$i]->role     = $role;
+				$data[$i]->group    = $users->group[$i] == 'ditto' ? (isset($prev['group']) ? $prev['group'] : '') : $users->group[$i];
+				$data[$i]->email    = $users->email[$i];
+				$data[$i]->gender   = $users->gender[$i];
+				$data[$i]->password = md5($users->password[$i]);
+				$data[$i]->commiter = $users->commiter[$i];
+				$data[$i]->join     = empty($users->join[$i]) ? '0000-00-00' : ($user->join[$i]);
+				$data[$i]->skype    = $users->skype[$i];
+				$data[$i]->qq       = $users->qq[$i];
+				$data[$i]->yahoo    = $users->yahoo[$i];
+				$data[$i]->gtalk    = $users->gtalk[$i];
+				$data[$i]->wangwang = $users->wangwang[$i];
+				$data[$i]->mobile   = $users->mobile[$i];
+				$data[$i]->phone    = $users->phone[$i];
+				$data[$i]->address  = $users->address[$i];
+				$data[$i]->zipcode  = $users->zipcode[$i];
+				
+				/* Change for append field, such as feedback.*/
+				if(!empty($this->config->user->batchAppendFields))
+				{
+					$appendFields = explode(',', $this->config->user->batchAppendFields);
+					foreach($appendFields as $appendField)
+					{
+						if(empty($appendField)) continue;
+						if(!isset($users->$appendField)) continue;
+						$fieldList = $users->$appendField;
+						$data[$i]->$appendField = $fieldList[$i];
+					}
+				}
+				
+				$accounts[$i]     = $data[$i]->account;
+				$prev['dept']     = $data[$i]->dept;
+				$prev['role']     = $data[$i]->role;
+				$prev['group']    = $data[$i]->group;
+				$prev['password'] = $users->password[$i];
+			}
+		}
+		
+		$this->loadModel('mail');
+		foreach($data as $user)
+		{
+			if($user->group)
+			{
+				$group = new stdClass();
+				$group->account = $user->account;
+				$group->group   = $user->group;
+				$this->dao->insert(TABLE_USERGROUP)->data($group)->exec();
+			}
+			unset($user->group);
+			$this->dao->insert(TABLE_USER)->data($user)->autoCheck()->exec();
+			if(dao::isError())
+			{
+				echo js::error(dao::getError());
+				die(js::reload('parent'));
+			}
+			else
+			{
+				if($this->config->mail->mta == 'sendcloud' and !empty($user->email)) $this->mail->syncSendCloud('sync', $user->email, $user->realname);
+			}
+		}
+	}
+	
+	/**
 	* check the item unique from the table
 	*
 	* @param  object $item
@@ -118,7 +225,124 @@ class kevinuserModel extends model {
 		}
 		return $allChanges;
 	}
-
+	
+	/**
+	 * Create a user.
+	 *
+	 * @access public
+	 * @return void
+	 */
+	public function create()
+	{
+		if(!$this->checkPassword()) return;
+		
+		$user = fixer::input('post')
+			->setDefault('join', '0000-00-00')
+			->setIF($this->post->password1 != false, 'password', md5($this->post->password1))
+			->setIF($this->post->password1 == false, 'password', '')
+			->remove('group, password1, password2, verifyPassword')
+			->get();
+		
+		if(isset($this->config->safe->mode) and $this->computePasswordStrength($this->post->password1) < $this->config->safe->mode)
+		{
+			dao::$errors['password1'][] = $this->lang->user->weakPassword;
+			return false;
+		}
+		
+		if(empty($_POST['verifyPassword']) or md5($this->post->verifyPassword) != $this->app->user->password)
+		{
+			dao::$errors['verifyPassword'][] = $this->lang->user->error->verifyPassword;
+			return false;
+		}
+		
+		$this->dao->insert(TABLE_USER)->data($user)
+			->autoCheck()
+			->batchCheck($this->config->user->create->requiredFields, 'notempty')
+			->check('account', 'unique')
+			->check('account', 'account')
+			->checkIF($this->post->email != false, 'email', 'email')
+			->exec();
+		if($this->post->group)
+		{
+			$data = new stdClass();
+			$data->account = $this->post->account;
+			$data->group   = $this->post->group;
+			$this->dao->insert(TABLE_USERGROUP)->data($data)->exec();
+		}
+		
+		if(!dao::isError())
+		{
+			$this->loadModel('mail');
+			if($this->config->mail->mta == 'sendcloud' and !empty($user->email)) $this->mail->syncSendCloud('sync', $user->email, $user->realname);
+		}
+	}
+	
+	/**
+	 * Check the passwds posted.
+	 *
+	 * @access public
+	 * @return bool
+	 */
+	public function checkPassword($canNoPassword = false)
+	{
+		if(!$canNoPassword and empty($_POST['password1'])) dao::$errors['password'][] = sprintf($this->lang->error->notempty, $this->lang->kevinuser->password);
+		if($this->post->password1 != false)
+		{
+			if($this->post->password1 != $this->post->password2) dao::$errors['password'][] = $this->lang->error->passwordsame;
+			if(!validater::checkReg($this->post->password1, '|(.){6,}|')) dao::$errors['password'][] = $this->lang->error->passwordrule;
+		}
+		return !dao::isError();
+	}
+	
+	
+	/**
+	 * Compute  password strength.
+	 *
+	 * @param  string    $password
+	 * @access public
+	 * @return int
+	 */
+	public function computePasswordStrength($password)
+	{
+		if(strlen($password) == 0) return 0;
+		
+		$strength = 0;
+		$length   = strlen($password);
+		
+		$uniqueChars = '';
+		$complexity  = array();
+		$chars = str_split($password);
+		foreach($chars as $letter)
+		{
+			$asc = ord($letter);
+			if($asc >= 48 && $asc <= 57)
+			{
+				$complexity[2] = 2;
+			}
+			elseif($asc >= 65 && $asc <= 90)
+			{
+				$complexity[1] = 2;
+			}
+			elseif($asc >= 97 && $asc <= 122)
+			{
+				$complexity[0] = 1;
+			}
+			else
+			{
+				$complexity[3] = 3;
+			}
+			if(strpos($uniqueChars, $letter) === false) $uniqueChars .= $letter;
+		}
+		if(strlen($uniqueChars) > 4)$strength += strlen($uniqueChars) - 4;
+		$strength += array_sum($complexity) + (2 * (count($complexity) - 1));
+		if($length < 6 and $strength >= 10) $strength = 9;
+		
+		$strength = $strength > 29 ? 29 : $strength;
+		$strength = floor($strength / 10);
+		
+		return $strength;
+	}
+	
 	/**
 	 * create class.
 	 * 
@@ -243,6 +467,11 @@ class kevinuserModel extends model {
 			->exec();
 		$allChanges[$id]		 = common::createChanges($oldClass, $class);
 		return $allChanges;
+	}
+	
+	public static function createMemberLinkOfBrowse($dept) {
+		$linkHtml = html::a(helper::createLink('kevinuser', 'browse', "param={$dept->id}"), $dept->name, '_self', "id='dept{$dept->id}'");
+		return $linkHtml;
 	}
 
 	/**
@@ -658,6 +887,15 @@ class kevinuserModel extends model {
 			->fetchAll();
 		return $deptusers;
 	}
+	
+	public function getDeptArray() {
+		$depts = $this->dao->select('id,name')->from(TABLE_DEPT)
+			->where('id')->ne(0)
+			->fetchPairs('id', 'name');
+		if (empty($depts))
+			return array();
+		return $depts;
+	}
 
 	/**
 	 * Get group by account.
@@ -781,6 +1019,21 @@ class kevinuserModel extends model {
 				->where('parent')->eq($this->config->kevinuser->classID['role'])
 				->orderBy('order')
 				->fetchPairs('code', 'titleCN');
+	}
+	
+	/**
+	 * Get user info by ID.
+	 *
+	 * @param  int    $userID
+	 * @access public
+	 * @return object|bool
+	 */
+	public function getById($userID, $field = 'account')
+	{
+		$user = $this->dao->select('*')->from(TABLE_USER)->where($field)->eq($userID)->fetch();
+		if(!$user) return false;
+		$user->last = date(DT_DATETIME1, $user->last);
+		return $user;
 	}
 
 	/**
@@ -969,6 +1222,83 @@ class kevinuserModel extends model {
 		$allChanges[$id] = common::createChanges($oldRecord, $data);
 		return $allChanges;
 	}
+	
+	/**
+	 * Update a user.
+	 *
+	 * @param  int    $userID
+	 * @access public
+	 * @return void
+	 */
+	public function update($userID)
+	{
+		if(!$this->checkPassword(true)) return;
+		
+		$oldUser = $this->getById($userID, 'id');
+		
+		$userID = $oldUser->id;
+		$user = fixer::input('post')
+			->setDefault('join', '0000-00-00')
+			->setIF($this->post->password1 != false, 'password', md5($this->post->password1))
+			->remove('password1, password2, groups,verifyPassword')
+			->get();
+		
+		if(isset($this->config->safe->mode) and isset($user->password) and $this->computePasswordStrength($this->post->password1) < $this->config->safe->mode)
+		{
+			dao::$errors['password1'][] = $this->lang->kevinuser->weakPassword;
+			return false;
+		}
+		
+		if(empty($_POST['verifyPassword']) or md5($this->post->verifyPassword) != $this->app->user->password)
+		{
+			dao::$errors['verifyPassword'][] = $this->lang->kevinuser->error->verifyPassword;
+			return false;
+		}
+		
+		$this->dao->update(TABLE_USER)->data($user)
+			->autoCheck()
+			->batchCheck($this->config->user->edit->requiredFields, 'notempty')
+			->check('account', 'unique', "id != '$userID'")
+			->check('account', 'account')
+			->checkIF($this->post->email != false, 'email', 'email')
+			->where('id')->eq((int)$userID)
+			->exec();
+		
+		/* If account changed, update the privilege. */
+		if($this->post->account != $oldUser->account)
+		{
+			$this->dao->update(TABLE_USERGROUP)->set('account')->eq($this->post->account)->where('account')->eq($oldUser->account)->exec();
+			if(strpos($this->app->company->admins, ',' . $oldUser->account . ',') !== false)
+			{
+				$admins = str_replace(',' . $oldUser->account . ',', ',' . $this->post->account . ',', $this->app->company->admins);
+				$this->dao->update(TABLE_COMPANY)->set('admins')->eq($admins)->where('id')->eq($this->app->company->id)->exec();
+				if(!dao::isError()) $this->app->user->account = $this->post->account;
+			}
+		}
+		
+		if(isset($_POST['groups']))
+		{
+			$this->dao->delete()->from(TABLE_USERGROUP)->where('account')->eq($this->post->account)->exec();
+			foreach($this->post->groups as $groupID)
+			{
+				$data          = new stdclass();
+				$data->account = $this->post->account;
+				$data->group   = $groupID;
+				$this->dao->replace(TABLE_USERGROUP)->data($data)->exec();
+			}
+		}
+		if(!empty($user->password) and $user->account == $this->app->user->account) $this->app->user->password = $user->password;
+		
+		if(!dao::isError())
+		{
+			$this->loadModel('mail');
+			if($this->config->mail->mta == 'sendcloud' and $user->email != $oldUser->email)
+			{
+				$this->mail->syncSendCloud('delete', $oldUser->email);
+				$this->mail->syncSendCloud('sync', $user->email, $user->realname);
+			}
+		}
+	}
 
 	/**
 	 * Update hours deptset.
@@ -1016,5 +1346,49 @@ class kevinuserModel extends model {
 
 		return $message;
 	}
-
+	
+	public function userbatchedit() {
+		$oldUsers		 = $this->dao->select('id, account')->from(TABLE_USER)->where('id')->in(array_keys($this->post->account))->fetchPairs('id', 'account');
+		$accountGroup	 = $this->dao->select('id, account')->from(TABLE_USER)->where('account')->in($this->post->account)->fetchGroup('account', 'id');
+		
+		$accounts = array();
+		foreach ($this->post->account as $id => $account) {
+			$users[$id]['account']		 = $account;
+			$users[$id]['code']			 = $this->post->code[$id];
+			$users[$id]['realname']		 = $this->post->realname[$id];
+			$users[$id]['email']		 = $this->post->email[$id];
+			$users[$id]['dept']			 = $this->post->dept[$id] == 'ditto' ? (isset($prev['dept']) ? $prev['dept'] : 0) : $this->post->dept[$id];
+			$users[$id]['deptdispatch']	 = $this->post->deptdispatch[$id] == 'ditto' ? (isset($prev['dept']) ? $prev['dept'] : 0) : $this->post->deptdispatch[$id];
+			
+			
+			if (isset($accountGroup[$account]) and count($accountGroup[$account]) > 1)
+				die(js::error(sprintf($this->lang->user->error->accountDupl, $id)));
+			if (in_array($account, $accounts))
+				die(js::error(sprintf($this->lang->user->error->accountDupl, $id)));
+			if (!validater::checkAccount($users[$id]['account']))
+				die(js::error(sprintf($this->lang->user->error->account, $id)));
+			if ($users[$id]['realname'] == '')
+				die(js::error(sprintf($this->lang->user->error->realname, $id)));
+			if ($users[$id]['email'] and ! validater::checkEmail($users[$id]['email']))
+				die(js::error(sprintf($this->lang->user->error->mail, $id)));
+			
+			$accounts[$id]	 = $account;
+			$prev['dept']	 = $users[$id]['dept'];
+		}
+		
+		foreach ($users as $id => $user) {
+			$this->dao->update(TABLE_USER)->data($user)->where('id')->eq((int) $id)->exec();
+			if ($user['account'] != $oldUsers[$id]) {
+				$oldAccount = $oldUsers[$id];
+				$this->dao->update(TABLE_USERGROUP)->set('account')->eq($user['account'])->where('account')->eq($oldAccount)->exec();
+				if (strpos($this->app->company->admins, ',' . $oldAccount . ',') !== false) {
+					$admins = str_replace(',' . $oldAccount . ',', ',' . $user['account'] . ',', $this->app->company->admins);
+					$this->dao->update(TABLE_COMPANY)->set('admins')->eq($admins)->where('id')->eq($this->app->company->id)->exec();
+				}
+				if (!dao::isError() and $this->app->user->account == $oldAccount)
+					$this->app->user->account = $users['account'];
+			}
+		}
+	}
+	
 }

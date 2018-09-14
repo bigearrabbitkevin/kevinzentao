@@ -21,8 +21,159 @@ class kevinuser extends control {
 	public function __construct($moduleName = '', $methodName = '') {
 		parent::__construct($moduleName, $methodName);
 		$this->loadModel('company')->setMenu();
+		$this->kevinuser->setMenu();
 	}
+	
+	
+	/**
+	 * Browse departments and users of a company.
+	 *
+	 * @param  int    $param
+	 * @param  string $type
+	 * @param  string $orderBy
+	 * @param  int    $recTotal
+	 * @param  int    $recPerPage
+	 * @param  int    $pageID
+	 * @access public
+	 * @return void
+	 */
+	public function browse($param = 0, $type = 'bydept', $orderBy = 'locked,id', $recTotal = 0, $recPerPage = 20, $pageID = 1) {
+		$this->loadModel('search');
+		$this->loadModel('dept');
+		
+		$deptID = $type == 'bydept' ? (int) $param : 0;
+		
+		/* Save session. */
+		$this->session->set('userList', $this->app->getURI(true));
+		
+		/* Set the pager. */
+		$this->app->loadClass('pager', $static	 = true);
+		$pager	 = pager::init($recTotal, $recPerPage, $pageID);
+		
+		/* Append id for secend sort. */
+		$sort = $this->loadModel('common')->appendOrder($orderBy);
+		
+		/* Build the search form. */
+		$queryID															 = $type == 'bydept' ? 0 : (int) $param;
+		$this->config->company->browse->search['actionURL']					 = $this->createLink('kevinuser', 'browse', "param=myQueryID&type=bysearch");
+		$this->config->company->browse->search['queryID']					 = $queryID;
+		$this->config->company->browse->search['params']['dept']['values']	 = array('' => '') + $this->dept->getOptionMenu();
+		
+		if ($type == 'bydept') {
+			$childDeptIds	 = $this->dept->getAllChildID($deptID);
+			$users			 = $this->dept->getUsers($childDeptIds, $pager, $sort);
+		} else {
+			if ($queryID) {
+				$query = $this->search->getQuery($queryID);
+				if ($query) {
+					$this->session->set('userQuery', $query->sql);
+					$this->session->set('userForm', $query->form);
+				} else {
+					$this->session->set('userQuery', ' 1 = 1');
+				}
+			}
+			$users = $this->loadModel('user')->getByQuery($this->session->userQuery, $pager, $sort);
+		}
+		$this->view->title		= $this->lang->kevinuser->common . $this->lang->colon . $this->lang->dept->common;
+		
+		$this->view->position[]	 = $this->lang->dept->common;
+		$this->view->users		 = $users;
+		$this->view->searchForm	 = $this->fetch('search', 'buildForm', $this->config->company->browse->search);
+		$this->view->deptTree	 = $this->dept->getTreeMenu($rooteDeptID = 0, array('kevinuserModel', 'createMemberLinkOfBrowse'));
+		$this->view->parentDepts = $this->dept->getParents($deptID);
+		$this->view->depts		 = $this->kevinuser->getDeptArray();
+		$this->view->orderBy	 = $orderBy;
+		$this->view->deptID		 = $deptID;
+		$this->view->pager		 = $pager;
+		$this->view->param		 = $param;
+		$this->view->type		 = $type;
+		
+		$this->display();
+	}
+	
+	/**
+	 * Batch create users.
+	 *
+	 * @param  int    $deptID
+	 * @access public
+	 * @return void
+	 */
+	public function batchCreate($deptID = 0)
+	{
+		$this->loadModel('dept');
+		$groups    = $this->dao->select('id, name, role')->from(TABLE_GROUP)->fetchAll();
+		$groupList = array('' => '');
+		$roleGroup = array();
+		foreach($groups as $group)
+		{
+			$groupList[$group->id] = $group->name;
+			if($group->role) $roleGroup[$group->role] = $group->id;
+		}
 
+		if(!empty($_POST))
+		{
+			$this->kevinuser->batchCreate();
+			die(js::locate($this->createLink('kevinuser', 'browse'), 'parent'));
+		}
+		
+		/* Set custom. */
+		foreach(explode(',', $this->config->kevinuser->customBatchCreateFields) as $field) $customFields[$field] = $this->lang->kevinuser->$field;
+		$this->view->customFields = $customFields;
+		$this->view->showFields   = $this->config->kevinuser->custom->batchCreateFields;
+		
+		$title      = $this->lang->kevinuser->common . $this->lang->colon . $this->lang->kevinuser->batchCreate;
+		$position[] = $this->lang->kevinuser->batchCreate;
+		$this->view->title     = $title;
+		$this->view->position  = $position;
+		$this->view->depts     = $this->dept->getOptionMenu();
+		$this->view->deptID    = $deptID;
+		$this->view->groupList = $groupList;
+		$this->view->roleGroup = $roleGroup;
+		
+		$this->display();
+	}
+	
+	/**
+	 * Create a suer.
+	 *
+	 * @param  int    $deptID
+	 * @access public
+	 * @return void
+	 */
+	public function create($deptID = 0)
+	{
+		$this->loadModel('dept');
+//		$this->lang->set('menugroup.user', 'company');
+//		$this->lang->user->menu      = $this->lang->company->menu;
+//		$this->lang->user->menuOrder = $this->lang->company->menuOrder;
+//
+		if(!empty($_POST))
+		{
+			$this->kevinuser->create();
+			if(dao::isError()) die(js::error(dao::getError()));
+			die(js::locate($this->createLink('kevinuser', 'browse'), 'parent'));
+		}
+		$groups    = $this->dao->select('id, name, role')->from(TABLE_GROUP)->fetchAll();
+		$groupList = array('' => '');
+		$roleGroup = array();
+		foreach($groups as $group)
+		{
+			$groupList[$group->id] = $group->name;
+			if($group->role) $roleGroup[$group->role] = $group->id;
+		}
+		
+		$title      = $this->lang->kevinuser->common . $this->lang->colon . $this->lang->kevinuser->create;
+		$position[] = $this->lang->kevinuser->create;
+		$this->view->title     = $title;
+		$this->view->position  = $position;
+		$this->view->depts     = $this->dept->getOptionMenu();
+		$this->view->groupList = $groupList;
+		$this->view->roleGroup = $roleGroup;
+		$this->view->deptID    = $deptID;
+		
+		$this->display();
+	}
+	
 	/**
 	 * Batch delete class.
 	 *
@@ -589,6 +740,94 @@ class kevinuser extends control {
 		$this->view->dept		 = $dept;
 		$this->display();
 	}
+	
+	/**
+	 * Edit a user.
+	 *
+	 * @param  string|int $userID   the int user id or account
+	 * @access public
+	 * @return void
+	 */
+	public function edit($userID)
+	{
+		
+		$this->loadModel('dept');
+//		$this->lang->set('menugroup.user', 'company');
+//		$this->lang->user->menu      = $this->lang->company->menu;
+//		$this->lang->user->menuOrder = $this->lang->company->menuOrder;
+		if(!empty($_POST))
+		{
+			$this->kevinuser->update($userID);
+			if(dao::isError()) die(js::error(dao::getError()));
+			die(js::locate($this->session->userList ? $this->session->userList : $this->createLink('kevinuser', 'browse'), 'parent'));
+		}
+		
+		$user       = $this->kevinuser->getById($userID, 'id');
+		$userGroups = $this->loadModel('group')->getByAccount($user->account);
+		
+		$title      = $this->lang->kevinuser->common . $this->lang->colon . $this->lang->kevinuser->edit;
+		$position[] = $this->lang->kevinuser->edit;
+		$this->view->title      = $title;
+		$this->view->position   = $position;
+		$this->view->user       = $user;
+		$this->view->depts      = $this->dept->getOptionMenu();
+		$this->view->userGroups = implode(',', array_keys($userGroups));
+		$this->view->groups     = $this->loadModel('group')->getPairs();
+		
+		$this->display();
+	}
+	
+	/**
+	 * Manage contacts.
+	 *
+	 * @param  int    $listID
+	 * @access public
+	 * @return void
+	 */
+	public function manageContacts($listID = 0) {
+		$this->loadModel('user');
+		$lists = $this->user->getContactLists($this->app->user->account);
+		
+		/* If set $mode, need to update database. */
+		if ($this->post->mode) {
+			/* The mode is new: append or new a list. */
+			if ($this->post->mode == 'new') {
+				if ($this->post->list2Append) {
+					$this->user->append2ContactList($this->post->list2Append, $this->post->users);
+					die(js::locate(inlink('manageContacts', "listID={$this->post->list2Append}"), 'parent'));
+				} elseif ($this->post->newList) {
+					$listID = $this->user->createContactList($this->post->newList, $this->post->users);
+					die(js::locate(inlink('manageContacts', "listID=$listID"), 'parent'));
+				}
+			} elseif ($this->post->mode == 'edit') {
+				$this->user->updateContactList($this->post->listID, $this->post->listName, $this->post->users);
+				die(js::locate(inlink('manageContacts', "listID={$this->post->listID}"), 'parent'));
+			}
+		}
+		if ($this->post->users) {
+			$mode	 = 'new';
+			$users	 = $this->user->getContactUserPairs($this->post->users);
+		} else {
+			$mode	 = 'edit';
+			$listID	 = $listID ? $listID : key($lists);
+			if (!$listID)
+				die(js::alert($this->lang->user->contacts->noListYet) . js::locate($this->createLink('kevinuser', 'browse'), 'parent'));
+			
+			$list				 = $this->user->getContactListByID($listID);
+			$users				 = explode(',', $list->userList);
+			$users				 = $this->user->getContactUserPairs($users);
+			$this->view->list	 = $list;
+		}
+		
+		$this->view->title		 = $this->lang->company->common . $this->lang->colon . $this->lang->kevinuser->manageContacts;
+		$this->view->position[]	 = $this->lang->company->common;
+		$this->view->position[]	 = $this->lang->kevinuser->manageContacts;
+		$this->view->lists		 = $this->user->getContactLists($this->app->user->account);
+		$this->view->users		 = $users;
+		$this->view->listID		 = $listID;
+		$this->view->mode		 = $mode;
+		$this->display();
+	}
 
 	/**
 	 *  Index.
@@ -842,5 +1081,23 @@ class kevinuser extends control {
 		$this->view->actions	 = $this->loadModel('action')->getList('kevinuserrecord', $id);
 		$this->display();
 	}
-
+	
+	public function userbatchedit($deptID = 0) {
+		if (isset($_POST['users'])) {
+			$this->view->users = $this->dao->select('*')->from(TABLE_USER)->where('account')->in($this->post->users)->orderBy('id')->fetchAll('id');
+		} elseif ($_POST) {
+			if ($this->post->account)
+				$this->kevinuser->userbatchedit();
+			die(js::locate($this->createLink('kevinuser', 'browse', "deptID=$deptID"), 'parent'));
+		}
+		$this->lang->set('menugroup.user', 'company');
+		$this->lang->user->menu		 = $this->lang->company->menu;
+		$this->lang->user->menuOrder = $this->lang->company->menuOrder;
+		
+		$this->view->title		 = $this->lang->company->common . $this->lang->colon . $this->lang->kevinuser->userbatchedit;
+		$this->view->position[]	 = $this->lang->kevinuser->browse;
+		$this->view->position[]	 = $this->lang->kevinuser->userbatchedit;
+		$this->view->depts		 = $this->loadModel('dept')->getOptionMenu();
+		$this->display();
+	}
 }

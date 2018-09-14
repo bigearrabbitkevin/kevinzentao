@@ -145,3 +145,106 @@ $lang->kevinuser->classify2Choice		 = "初级";
 $lang->kevinuser->classify3Choice		 = "乙方软硬件";
 
 
+$lang->kevinuser->browse			 = "用户";
+$lang->kevinuser->calendar		 = '日历';
+
+$lang->kevinuser->userbatchedit	 = "批量编辑用户";
+$lang->kevinuser->manageContacts	 = "维护联系人";
+
+$lang->kevinuser->lockedTemp		 = "临时被锁定。";
+$lang->kevinuser->lockedLong		 = "长期被锁定。";
+$lang->kevinuser->lockedNone		 = "激活的用户。";
+$lang->kevinuser->userLock			 = '锁定用户';
+$lang->kevinuser->unlock			 = "解锁用户";
+
+$lang->kevinuser->create			 = '添加用户';
+$lang->kevinuser->edit            = "编辑用户";
+$lang->kevinuser->batchcreate			 = "批量添加";
+$lang->kevinuser->batchCreate     = "批量添加用户";
+$lang->kevinuser->deptdispatch = "服务部门";
+
+
+$lang->kevinuser->company     = '所属公司';
+$lang->kevinuser->dept        = '所属部门';
+$lang->kevinuser->account     = '用户名';
+$lang->kevinuser->password    = '密码';
+$lang->kevinuser->password2   = '请重复密码';
+$lang->kevinuser->role        = '职位';
+$lang->kevinuser->group       = '分组';
+$lang->kevinuser->realname    = '真实姓名';
+$lang->kevinuser->nickname    = '昵称';
+$lang->kevinuser->commiter    = '源代码帐号';
+$lang->kevinuser->birthyear   = '出生年';
+$lang->kevinuser->gender      = '性别';
+$lang->kevinuser->email       = '邮箱';
+$lang->kevinuser->basicInfo   = '基本信息';
+$lang->kevinuser->accountInfo = '帐号信息';
+$lang->kevinuser->verify      = '安全验证';
+$lang->kevinuser->contactInfo = '联系信息';
+$lang->kevinuser->skype       = 'Skype';
+$lang->kevinuser->qq          = 'QQ';
+$lang->kevinuser->yahoo       = '雅虎通';
+$lang->kevinuser->gtalk       = 'GTalk';
+$lang->kevinuser->wangwang    = '旺旺';
+$lang->kevinuser->mobile      = '手机';
+$lang->kevinuser->phone       = '电话';
+$lang->kevinuser->address     = '通讯地址';
+$lang->kevinuser->zipcode     = '邮编';
+$lang->kevinuser->join        = '入职日期';
+$lang->kevinuser->visits      = '访问次数';
+$lang->kevinuser->ip          = '最后IP';
+$lang->kevinuser->last        = '最后登录';
+$lang->kevinuser->ranzhi      = '然之帐号';
+$lang->kevinuser->ditto       = '同上';
+$lang->kevinuser->originalPassword = '原密码';
+$lang->kevinuser->verifyPassword   = '请输入你的密码';
+$lang->kevinuser->resetPassword    = '忘记密码';
+
+$lang->kevinuser->genderList['m'] = '男';
+$lang->kevinuser->genderList['f'] = '女';
+
+$lang->kevinuser->placeholder = new stdclass();
+$lang->kevinuser->placeholder->account   = '英文、数字和下划线的组合，三位以上';
+$lang->kevinuser->placeholder->password1 = '六位以上';
+$lang->kevinuser->placeholder->role      = '职位影响内容和用户列表的顺序。';
+$lang->kevinuser->placeholder->group     = '分组决定用户的权限列表。';
+$lang->kevinuser->placeholder->commiter  = '版本控制系统(subversion)中的帐号';
+$lang->kevinuser->placeholder->verify    = '需要输入你的密码加以验证';
+
+$lang->kevinuser->placeholder->passwordStrength[1] = '强度必须为中，6位以上，包含大小写字母，数字。';
+$lang->kevinuser->placeholder->passwordStrength[2] = '强度必须为强，10位以上，包含字母，数字，特殊字符。';
+
+$lang->kevinuser->roleList['']       = '';
+$lang->kevinuser->roleList['dev']    = '研发';
+$lang->kevinuser->roleList['qa']     = '测试';
+$lang->kevinuser->roleList['pm']     = '项目经理';
+$lang->kevinuser->roleList['po']     = '产品经理';
+$lang->kevinuser->roleList['td']     = '研发主管';
+$lang->kevinuser->roleList['pd']     = '产品主管';
+$lang->kevinuser->roleList['qd']     = '测试主管';
+$lang->kevinuser->roleList['top']    = '高层管理';
+$lang->kevinuser->roleList['others'] = '其他';
+
+$lang->kevinuser->error = new stdclass();
+$lang->kevinuser->error->account       = "ID %s，英文、数字和下划线的组合，三位以上";
+$lang->kevinuser->error->accountDupl   = "ID %s，该用户名已经存在";
+$lang->kevinuser->error->realname      = "ID %s，必须填写真实姓名";
+$lang->kevinuser->error->password      = "ID %s，密码必须六位以上";
+$lang->kevinuser->error->mail          = "ID %s，请填写正确的邮箱地址";
+$lang->kevinuser->error->role          = "ID %s，职位不能为空";
+
+$lang->kevinuser->error->verifyPassword   = "安全验证密码错误，请输入你的登录密码";
+$lang->kevinuser->error->originalPassword = "原密码不正确";
+
+$lang->kevinuser->contacts = new stdclass();
+$lang->kevinuser->contacts->common   = '联系人';
+$lang->kevinuser->contacts->listName = '列表名称';
+
+$lang->kevinuser->contacts->manage        = '维护列表';
+$lang->kevinuser->contacts->contactsList  = '已有列表';
+$lang->kevinuser->contacts->selectedUsers = '选择用户';
+$lang->kevinuser->contacts->selectList    = '选择列表';
+$lang->kevinuser->contacts->createList    = '创建新列表';
+$lang->kevinuser->contacts->noListYet     = '还没有创建任何列表，请先创建联系人列表。';
+$lang->kevinuser->contacts->confirmDelete = '您确定要删除这个列表吗？';
+$lang->kevinuser->contacts->or            = ' 或者 ';

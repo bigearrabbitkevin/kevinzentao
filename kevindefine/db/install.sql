@@ -19,26 +19,6 @@ CREATE TABLE IF NOT EXISTS `zt_kevincalendar` (
 # update to custom for zentao 
 
 #
-# Structure for table "zt_hoursproject"
-#
-CREATE TABLE IF NOT EXISTS `zt_hoursproject` (
-  `id` mediumint(9) unsigned NOT NULL AUTO_INCREMENT,
-  `dept` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `deptdispatch` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `project` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `account` char(30) NOT NULL DEFAULT '',
-  `year` int(4) NOT NULL DEFAULT '0',
-  `month` int(2) NOT NULL DEFAULT '0',
-  `cashCode` varchar(45) NOT NULL DEFAULT '',
-  `hours` float(11,3) NOT NULL DEFAULT '0.000',
-  `deleted` enum('0','1') NOT NULL DEFAULT '0',
-  `lastEditedBy` varchar(30) NOT NULL,
-  `lastEditedDate` datetime NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `unique` (`project`,`account`,`year`,`month`)
-) ENGINE=MyISAM AUTO_INCREMENT=1610 DEFAULT CHARSET=utf8;
-
-#
 # Structure for table "zt_hourscashcode"
 #
 CREATE TABLE IF NOT EXISTS `zt_hourscashcode` (

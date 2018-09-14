@@ -70,8 +70,6 @@ CREATE TABLE IF NOT EXISTS `kevindevice_sendoutlist` (
 ALTER TABLE `zt_kevinclockact` ADD `desc` text NOT NULL;
 ALTER TABLE `zt_kevinclockact` MODIFY `action` enum('in','out') NOT NULL DEFAULT 'in';
 
-ALTER TABLE `zt_hoursproject` ADD `dept` mediumint(8) unsigned NOT NULL DEFAULT '0';
-ALTER TABLE `zt_hoursproject` ADD `deptdispatch` mediumint(8) unsigned NOT NULL DEFAULT '0';
 ALTER TABLE `zt_hourscashcode` ADD `dept` mediumint(8) unsigned NOT NULL DEFAULT '0';
 ALTER TABLE `zt_hourscashcode` ADD `deptdispatch` mediumint(8) unsigned NOT NULL DEFAULT '0';
 update zt_kevinclockact a set a.action = 'out' where a.action != 'in'

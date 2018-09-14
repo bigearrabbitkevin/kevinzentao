@@ -1,27 +1,24 @@
 ---
-name: Kevin Define
+name: Kevin 自定义
 code: kevindefine
 type: extension
 copyright: Kevin
 site: 
 author: 'kevin<3301647@qq.com>'
 abstract: >
-  Kevin Define for zentao.project bug and
-  story add search type.Create task in
-  story. my story block in my dashboard.
+  多个Kevin插件模块
 desc: >
-  zentao product add task. project bug and
-  story and search type. Create task in
-  story. my story block in my dashboard.
+  多个Kevin插件模块
 install: |
-  1. Install through the buildin extension manager.
+  1. 通过禅道的插件管理来进行安装。
+  2. 手工添加或修改数据库的列，具体见instal.sql
 releases:
-  2.5:
+  2.6:
     charge: free
     license: ZPL (http://zpl.pub/v1)
     changelog:
-         1.��Ա���༶�������Ĺ�������
-    date: 2017-12-19
+         1.清理删除模块
+    date: 2018-09-14
     zentao:
       compatible: 8.4.1
       incompatible:

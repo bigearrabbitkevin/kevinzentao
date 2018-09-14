@@ -416,21 +416,7 @@ class kevinuser extends control {
 		$this->display();
 	}
 	
-	/**
-	 * Delete hours deptset.
-	 *
-	 * @param  int $id
-	 * @access public
-	 * @return void
-	 */
-	public function deletedeptuser($id) {
-		$id = (int) $id;
-		$this->dao->delete()->from(TABLE_KEVIN_DEPTSET)
-				->where('id')->eq($id)
-				->exec();
-		die(js::reload('parent'));
-	}
-	
+
 	/**
 	 * Batch delete dept.
 	 *
@@ -679,46 +665,6 @@ class kevinuser extends control {
 		$this->view->recTotal	 = $recTotal;
 		$this->view->recPerPage	 = $recPerPage;
 		$this->view->pageID		 = $pageID;
-		$this->display();
-	}
-
-	/**
-	 *  View and update deptset.
-	 * 
-	 * @param  int $recTotal,$recPerPage,$pageID
-	 * @access public
-	 * @return void
-	 */
-	public function deptset($recTotal = 0, $recPerPage = 10, $pageID = 1) {
-		if (!empty($_POST)) {
-			$messages = $this->kevinuser->updateDeptUsers();
-			if (dao::isError()) die(js::error(dao::getError()));
-			$vars = array('recTotal' => $recTotal, 'recPerPage' => $recPerPage, 'pageID' => $pageID);
-			if(!empty($messages)){
-				$message = '';
-				foreach ($messages as $key =>$item) {
-					if($key == 0) {
-						$message .= $item;
-					}else{
-						$message .= ','.$item;
-					}
-				}
-				die(js::alert($message) .js::locate($this->createLink('kevinuser', 'deptset', $vars), 'parent.parent'));
-			}else{
-				die(js::locate($this->createLink('kevinuser', 'deptset', $vars), 'parent.parent'));
-			}
-		}
-
-		/* Load pager. */
-		$this->app->loadClass('pager', $static			 = true);
-		if ($this->app->getViewType() == 'mhtml') $recPerPage		 = 10;
-		$pager			 = pager::init($recTotal, $recPerPage, $pageID);
-		$pager->recTotal = 0;
-
-		$this->view->title			 = $this->lang->kevinuser->common . $this->lang->colon . $this->lang->kevinuser->deptset;
-		$this->view->position[]		 = $this->lang->kevinuser->deptset;
-		$this->view->deptaccounts	 = $this->kevinuser->getDeptset($pager);
-		$this->view->pager			 = $pager;
 		$this->display();
 	}
 

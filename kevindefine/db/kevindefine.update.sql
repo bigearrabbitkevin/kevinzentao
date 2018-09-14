@@ -127,11 +127,6 @@ ALTER TABLE `kv_plan_project` CHANGE `status` `status` enum('draft','planned','p
 -- 2017-8-30
 ALTER TABLE `kv_plan_project` ADD  `ProNew` enum('0','1') NOT NULL DEFAULT '0';
 
--- 2017-12-05
-RENAME TABLE kv_hours_deptset TO kv_deptset
-ALTER TABLE `kv_deptset`
-CHANGE COLUMN `dept` `deptPrefer`  mediumint(9) NOT NULL DEFAULT 0 AFTER `account`;
-
 # For kevin login 1.6.1 2017-1-05
 
 #kevinlogin

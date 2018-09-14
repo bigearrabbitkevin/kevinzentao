@@ -13,12 +13,12 @@ install: |
   1. 通过禅道的插件管理来进行安装。
   2. 手工添加或修改数据库的列，具体见instal.sql
 releases:
-  2.5:
+  2.6:
     charge: free
     license: ZPL (http://zpl.pub/v1)
     changelog:
-         1.人员分类级别履历的功能完善
-    date: 2017-12-19
+         1.清理删除模块
+    date: 2018-09-14
     zentao:
       compatible: 8.4.1
       incompatible:

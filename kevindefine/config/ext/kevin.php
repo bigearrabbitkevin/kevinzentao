@@ -105,8 +105,6 @@ define('TABLE_KEVIN_USER_RECORD',          '`' . $prefix . 'record`');
 $config->objectTables['kevinuser_class']      = TABLE_KEVIN_USER_CLASS;
 $config->objectTables['kevinuser_record']     = TABLE_KEVIN_USER_RECORD;
 
-define('TABLE_KEVIN_DEPTSET',          '`kv_deptset`');
-$config->objectTables['kevin_deptset']      = TABLE_KEVIN_DEPTSET;
 
 //db
 define('TABLE_DEFAULTPASSWORD',     '`' . $config->db->prefix  . 'defaultpassword`');

@@ -133,8 +133,6 @@ $lang->kevinuser->emailPlaceholder			 = "填写公司email";
 $lang->kevinuser->codePlaceholder			 = "填写公司代码";
 $lang->kevinuser->orderPlaceholder			 = "填写排序";
 
-$lang->kevinuser->deptset		 = "部门指定";
-$lang->kevinuser->deletedeptuser = "删除部门用户";
 $lang->kevinuser->notexist		 = "不存在";
 $lang->kevinuser->deptinfo		 = "部门信息";
 $lang->kevinuser->path		 = "path";

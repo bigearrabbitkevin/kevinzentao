@@ -614,19 +614,6 @@ CREATE TABLE IF NOT EXISTS `kv_user_record` (
   UNIQUE KEY `account` (`account`,`start`,`end`,`class`)
 ) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 
-#
-# Structure for table "kv_deptset" 2017-12-5
-#
-
-CREATE TABLE IF NOT EXISTS `kv_deptset` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `account` char(30) DEFAULT NULL,
-  `deptPrefer` mediumint(9) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `kv_lapuser_domain_remote` (`account`),
-  KEY `kv_lapuser_remote` (`account`)
-) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
-
 #2017-12-5 move in kevinlogin table
 
 #

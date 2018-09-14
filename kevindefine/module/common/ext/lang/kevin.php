@@ -26,7 +26,7 @@ $lang->kevin->menu->kevinkendoui	 = array('link' => 'Kendo|kevinkendoui|sample')
 $lang->kevin->menu->kevinstore		 = array('link' => '仓库|kevinstore|itemlist', 'alias' => 'index,itemlist,grouplist,groupview,itemedit,itemview,statistic,rowlist');
 $lang->kevin->menu->kevinsvn		 = array('link' => 'SVN|kevinsvn|index', 'alias' => 'index,authz,account,statistic');
 $lang->kevin->menu->kevinclass		 = array('link' => '分类|kevinclass|index', 'alias' => 'book,help');
-$lang->kevin->menu->kevinuser		 = array('link' => '用户|kevinuser|classlist', 'alias' => 'index,classlist,recordlist,deptlist,deptset,defaultpwd,managepriv,domainaccount');
+$lang->kevin->menu->kevinuser		 = array('link' => '用户|kevinuser|classlist', 'alias' => 'index,classlist,recordlist,deptlist,defaultpwd,managepriv,domainaccount');
 
 $lang->kevin->menuOrder[5]	 = 'index';
 $lang->kevin->menuOrder[20]	 = 'kevindevice';
@@ -272,11 +272,10 @@ $lang->kevinclass->menuOrder[30] = 'help';
 $lang->kevinuser					 = new stdclass();
 $lang->kevinuser->menu				 = new stdclass();
 $lang->kevinuser->menu->index		 = '首页|kevinuser|index';
-$lang->kevinuser->menu->kevinbrowse	 = '用户.K|kevinuser|browse';
+$lang->kevinuser->menu->kevinbrowse	 = '用户.K|kevinhours|browse';
 $lang->kevinuser->menu->classlist	 = '级别列表|kevinuser|classlist';
 $lang->kevinuser->menu->recordlist	 = '人员履历列表|kevinuser|recordlist';
 $lang->kevinuser->menu->deptlist	 = '部门列表|kevinuser|deptlist';
-$lang->kevinuser->menu->deptset	 = '部门指定|kevinuser|deptset';
 $lang->kevinuser->menu->batchAddUser = array('link' => '<i class="icon-plus-sign"></i>&nbsp;批量添加|kevinuser|batchCreate|dept=%s', 'subModule' => 'kevinuser', 'float' => 'right');
 $lang->kevinuser->menu->addUser      = array('link' => '<i class="icon-plus"></i>&nbsp;添加用户|kevinuser|create|dept=%s', 'subModule' => 'kevinuser', 'float' => 'right');
 
@@ -293,7 +292,6 @@ $lang->kevinuser->menuOrder[10]	 = 'kevinbrowse';
 $lang->kevinuser->menuOrder[20]	 = 'classlist';
 $lang->kevinuser->menuOrder[30]	 = 'recordlist';
 $lang->kevinuser->menuOrder[40]	 = 'deptlist';
-$lang->kevinuser->menuOrder[50]	 = 'deptset';
 
 $lang->kevinuser->menuOrder[70]	 = 'defaultpwd';
 $lang->kevinuser->menuOrder[75]	 = 'managepriv';

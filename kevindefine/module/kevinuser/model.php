@@ -868,25 +868,7 @@ class kevinuserModel extends model {
 		return $deptlist;
 	}
 
-	/**
-	 * Get hours deptset.
-	 * 
-	 * @param  object    $pager 
-	 * @access public
-	 * @return array
-	 */
-	public function getDeptset($pager = null) {
-		$deptusers = $this->dao->select('a.*,u.realname,d.name')
-			->from(TABLE_KEVIN_DEPTSET)->alias('a')
-			->leftJoin(TABLE_USER)->alias('u')
-			->on('a.account=u.account')
-			->leftJoin(TABLE_DEPT)->alias('d')
-			->on('a.deptPrefer=d.id')
-			->orderBy('a.account')
-			->page($pager)
-			->fetchAll();
-		return $deptusers;
-	}
+
 	
 	public function getDeptArray() {
 		$depts = $this->dao->select('id,name')->from(TABLE_DEPT)
@@ -1300,53 +1282,6 @@ class kevinuserModel extends model {
 		}
 	}
 
-	/**
-	 * Update hours deptset.
-	 * 
-	 * @access public
-	 * @return void
-	 */
-	public function updateDeptUsers() {
-		$data = fixer::input('post')->get();
-
-		if (!($data && isset($data->idList))) return false;
-		$message = array();
-		/* Initialize todos from the post data. */
-		foreach ($data->idList as $userID) {
-			$deptuser				 = new stdClass();
-			$deptuser->deptPrefer	 = $data->deptPreferList[$userID];
-			$deptuser->account		 = $data->accountList[$userID];
-			if (!$deptuser->account) continue;
-			$userModel				 = $this->dao->select('account')->from(TABLE_USER)->where('account')->eq($deptuser->account)->fetch();
-			if (!$userModel) {
-				array_push($message, $this->lang->kevinuser->manage . '"' . $deptuser->account . '"' . $this->lang->kevinuser->notexist);
-				continue;
-			}
-
-			$deptModel = $this->dao->select('id')->from(TABLE_DEPT)->where('id')->eq($deptuser->deptPrefer)->fetch();
-			if (!$deptModel) {
-				array_push($message, $this->lang->kevinuser->dept . '"' . $deptuser->deptPrefer . '"' . $this->lang->kevinuser->notexist);
-				continue;
-			}
-
-			if ($userID > 0) {
-				$this->dao->update(TABLE_KEVIN_DEPTSET)
-					->data($deptuser)
-					->autoCheck()
-					->where('id')->eq($userID)
-					->exec();
-			} else {
-				$this->dao->insert(TABLE_KEVIN_DEPTSET)
-					->data($deptuser)
-					->check('account', 'unique')
-					->autoCheck()
-					->exec();
-			}
-		}
-
-		return $message;
-	}
-	
 	public function userbatchedit() {
 		$oldUsers		 = $this->dao->select('id, account')->from(TABLE_USER)->where('id')->in(array_keys($this->post->account))->fetchPairs('id', 'account');
 		$accountGroup	 = $this->dao->select('id, account')->from(TABLE_USER)->where('account')->in($this->post->account)->fetchGroup('account', 'id');

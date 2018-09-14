@@ -471,8 +471,6 @@ $lang->resource->kevinuser->deptBatchEdit	 = 'deptBatchEdit';
 $lang->resource->kevinuser->deptBatchDelete = 'deptBatchDelete';
 
 $lang->resource->kevinuser->deptlist	 = 'deptlist';
-$lang->resource->kevinuser->deptset	 = 'deptset';
-$lang->resource->kevinuser->deletedeptuser	 = 'deletedeptuser';
 $lang->resource->kevinuser->browse	 = 'browse';
 $lang->resource->kevinuser->userbatchedit	 = 'userbatchedit';
 $lang->resource->kevinuser->manageContacts	 = 'manageContacts';
@@ -513,7 +511,6 @@ $lang->kevinuser->methodOrder[34]	 = 'deptcreate';
 $lang->kevinuser->methodOrder[35]	 = 'deptedit';
 $lang->kevinuser->methodOrder[36]	 = 'deptview';
 $lang->kevinuser->methodOrder[37]	 = 'deptdelete';
-$lang->kevinuser->methodOrder[38]	 = 'deptset';
 $lang->kevinuser->methodOrder[39]	 = 'deletedeptuser';
 
 //kevinlogin

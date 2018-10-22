@@ -8,7 +8,8 @@ class kevincalendarModel extends model {
 	 * @var account
 	 * @access public
 	 */
-	public $account = "";
+    public $account = "";
+    public $table_TODO = "TABLE_TODO";
 
 	/**
 	 * Construct function, load model of kevincalendar.
@@ -278,7 +279,7 @@ class kevincalendarModel extends model {
 	public function getTodosByBeginAndEnd($begin, $end) {
 		if ($this->account == "")
 			$this->account	 = $this->app->user->account;
-		$stmt			 = $this->dao->select('a.*,b.realname')->from(TABLE_TODO)->alias('a')
+		$stmt			 = $this->dao->select('a.*,b.realname')->from($this->table_TODO)->alias('a')
 			->leftJoin(TABLE_USER)->alias('b')->on('a.account = b.account')
 			->where('a.account')->eq($this->account)
 			->andWhere("a.date >= '$begin'")

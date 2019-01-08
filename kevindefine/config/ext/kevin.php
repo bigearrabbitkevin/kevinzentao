@@ -1,15 +1,6 @@
 <?php
 
 //db define
-define('TABLE_HOURSPROJECT', '`' . $config->db->prefix . 'hoursproject`');
-define('TABLE_HOURSCASHCODE', '`' . $config->db->prefix . 'hourscashcode`');
-define('TABLE_KEVINCLOCKACT', '`' . $config->db->prefix . 'kevinclockact`');
-
-$config->objectTables['hoursproject']	 = TABLE_HOURSPROJECT;
-$config->objectTables['hourscashcode']	 = TABLE_HOURSCASHCODE;
-$config->objectTables['kevinclockact']	 = TABLE_KEVINCLOCKACT;
-
-//db define
 $prefix = 'kv_soft_';
 define('TABLE_KEVIN_SOFT_LIST',          '`' . $prefix . 'list`');
 define('TABLE_KEVIN_SOFT_FILE',          '`' . $prefix . 'file`');
@@ -22,18 +13,6 @@ $config->objectTables['kevinsoftfile']  = TABLE_KEVIN_SOFT_FILE;
 $config->objectTables['kevinsoftversion']    = TABLE_KEVIN_SOFT_VERSION;
 $config->objectTables['kevinsoftgroup']    = TABLE_KEVIN_SOFT_GROUPVERSION;
 $config->objectTables['kevinsoftmodule']    = TABLE_KEVIN_SOFT_MODULE;
-
-//db define
-$prefix = 'kv_plan_';
-define('TABLE_KEVIN_PLAN_LIST',          '`' . $prefix . 'list`');
-define('TABLE_KEVIN_PLAN_MEMBER',          '`' . $prefix . 'member`');
-define('TABLE_KEVIN_PLAN_PROJECT',          '`' . $prefix . 'project`');
-define('TABLE_KEVIN_PLAN_PROJECTGROUP',          '`' . $prefix . 'projectgroup`');
-
-$config->objectTables['kevinplan']        = TABLE_KEVIN_PLAN_LIST;
-$config->objectTables['kevinplanmember']    = TABLE_KEVIN_PLAN_MEMBER;
-$config->objectTables['kevinplanproject']    = TABLE_KEVIN_PLAN_PROJECT;
-$config->objectTables['kevinplanprojectgroup']    = TABLE_KEVIN_PLAN_PROJECTGROUP;
 
 //db define
 define('TABLE_KEVINKENDOUI', '`' . $config->db->prefix . 'kevinkendoui`'); 
@@ -65,14 +44,6 @@ $config->objectTables['kevin_chartexample']       = TABLE_KEVIN_CHARTEXAMPLE;
 define('TABLE_KEVINCALENDAR',          '`' . $config->db->prefix . 'kevincalendar`');
 
 $config->objectTables['kevincalendar']        = TABLE_KEVINCALENDAR;
-
-//db define
-define('TABLE_KEVINHOURSB_MONTHCOUNT',          '`kv_hoursb_monthcount`');
-//db define
-define('TABLE_KEVINHOURSB_MONTHCOUNT_INPUT',          '`kv_hoursb_monthcount_input`');
-
-$config->objectTables['kevinhoursbmonthcount']        = TABLE_KEVINHOURSB_MONTHCOUNT;
-
 
 //kevinstore db define
 define('TABLE_KEVINSTROE_ITEM', '`kv_store_item`');

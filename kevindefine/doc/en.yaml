@@ -13,7 +13,7 @@ install: |
   1. 通过禅道的插件管理来进行安装。
   2. 手工添加或修改数据库的列，具体见instal.sql
 releases:
-  2.6:
+  2.7:
     charge: free
     license: ZPL (http://zpl.pub/v1)
     changelog:

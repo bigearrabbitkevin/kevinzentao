@@ -9,7 +9,7 @@ class kevincalendarModel extends model {
 	 * @access public
 	 */
     public $account = "";
-    public $table_TODO = "TABLE_TODO";
+    public $table_TODO = "zt_todo";
 
 	/**
 	 * Construct function, load model of kevincalendar.

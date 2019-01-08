@@ -3,7 +3,6 @@ include 'header.html.php';
 ?>
 <?php 
 //定义首页的列表
-$MainItemList[]= array('module'=>'kevinhours', 'method'=> 'index', 'name'=> '工时考勤','desc'=>'工时考勤,加班单，工时单');
 $MainItemList[]= array('module'=>'kevinsvn', 'method'=> 'index', 'name'=> 'SVN','desc'=>'SVN管理');
 $MainItemList[]= array('module'=>'kevinuser', 'method'=> 'classlist', 'name'=> '用户','desc'=>'用户管理');
 $MainItemList[]= array('module'=>'kevinclass', 'method'=> 'index', 'name'=> '分类','desc'=>'数据分类');

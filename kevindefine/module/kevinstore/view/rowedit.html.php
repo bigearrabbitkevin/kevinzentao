@@ -18,7 +18,7 @@
 <div class='container mw-800px'>
 	<fieldset>
 
-		<legend><?php echo $lang->kevinplan->legendBasic; ?></legend>
+		<legend><?php echo $lang->kevinstore->legendBasic; ?></legend>
 		<table align='center' class='table table-form'>
 			<tr>
 				<th><?php echo $lang->kevinstore->name; ?></th>

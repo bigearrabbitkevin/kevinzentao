@@ -152,7 +152,7 @@ class kevinlogin extends control {
 			die(js::confirm($this->lang->kevinlogin->confirmUnlock, $this->createLink('kevinlogin', 'unlock', "account=$account&confirm=yes")));
 		} else {
 			$this->loadModel('user')->cleanLocked($account);
-			die(js::locate($this->createLink('kevinhours', 'browse'), 'parent'));
+			die(js::reload('parent.parent'));
 		}
 	}
 
@@ -165,7 +165,7 @@ class kevinlogin extends control {
 				die(js::reload('parent.parent'));
 			}
 		} else {
-			die(js::locate($this->createLink('kevinhours', 'browse'), 'parent'));
+			die(js::reload('parent.parent'));
 		}
 	}
 

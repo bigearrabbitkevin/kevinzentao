@@ -6,7 +6,7 @@
  * @charge: free
  * @license: ZPL (http://zpl.pub/v1)
  * @author      Kevin <3301647@qq.com>
- * @package     kevinplan
+ * @package     kevinuser
  * @link        http://www.zentao.net
  */
 ?>

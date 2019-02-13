@@ -1,0 +1,25 @@
+---
+name: Kendo UI
+code: kendoui
+type: extension
+copyright: http://www.telerik.com
+site: http://www.telerik.com/kendo-ui
+author: http://www.telerik.com
+abstract: Kendo UI
+desc: Kendo UI
+install: >
+  Install through the buildin extension
+  php.ini:add one line
+  extension=php_soap.dll, download
+  php_soap.dll to php/ext folder.
+releases:
+  2013.2.918:
+    charge: free
+    license: www.telerik.com / free
+    changelog: 2013.2.918
+    date: 2015-12-28
+    zentao:
+      compatible: all
+      incompatible:
+    depends: null
+    conflicts: null

@@ -213,7 +213,7 @@ class kevincalendarModel extends model {
 	 */
 	public function getStatusArray($date = 'thisMonth') {
 		extract(kevin::getBeginEndTime($date));
-		return getStatusArrayB($begin, $end);
+		return $this->getStatusArrayB($begin, $end);
 	}
 
 	/**

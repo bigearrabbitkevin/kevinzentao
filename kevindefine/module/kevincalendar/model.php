@@ -206,13 +206,24 @@ class kevincalendarModel extends model {
 
 	/**
 	 * 获得某个周期内所有日期工作类型数组
-	 * 如果周期为全部设成thisyear
-	 * return array  
+	 * 
+	 * @var date
+	 * return array
 	 * e.g array['2015-01-01'] = 'law';
 	 */
 	public function getStatusArray($date = 'thisMonth') {
 		extract(kevin::getBeginEndTime($date));
+		return getStatusArrayB($begin, $end);
+	}
 
+	/**
+	 * 获得某个周期内所有日期工作类型数组
+	 * @var begin 开始日期，格式'2015-01-01'
+	 * @var end 结束日期，格式'2015-02-09'
+	 * return array  
+	 * e.g array['2015-01-01'] = 'law';
+	 */
+	public function getStatusArrayB($begin, $end) {
 		$kevincalendars	 = $this->getList($begin, $end);
 		$dateArray		 = array();
 		//获得起始相差天数
@@ -232,7 +243,7 @@ class kevincalendarModel extends model {
 		}
 		return $dateArray;
 	}
-
+	
 	/**
 	 * 获得特定月份的日期工作类型数组
 	 * return: array 

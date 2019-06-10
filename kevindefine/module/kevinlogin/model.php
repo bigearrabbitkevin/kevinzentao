@@ -226,17 +226,20 @@ class kevinloginModel extends model {
 	 * @return void
 	 */
 	public function updatePrivOfGroup() {
-		if ($this->post->module == false or $this->post->actions == false or $this->post->groups == false) return false;
-		//删除权限
+		$module	 = $this->post->module;
+		$method = $this->post->actions;
+		if ($module == false or $method == false) return false; //no module or $method
+		//1,删除权限
 		$this->dao->delete()->from(TABLE_GROUPPRIV)
-				->where('module')->eq($this->post->module)
-				->andWhere('method')->eq($this->post->actions)->exec();
-		//插入权限
-		foreach ($this->post->groups as $group) {
-			$data			 = new stdclass();
+				->where('module')->eq($module)
+				->andWhere('method')->eq($method)->exec();
+		//2,插入权限
+		$data	 = new stdclass();
+		$groups =$this->post->groups;
+		foreach ($groups as $group) {
 			$data->group	 = $group;
-			$data->module	 = $this->post->module;
-			$data->method	 = $this->post->actions;
+			$data->module	 = $module;
+			$data->method	 = $method;
 			$this->dao->insert(TABLE_GROUPPRIV)
 					->data($data)
 					->exec();

@@ -110,19 +110,20 @@ class kevinlogin extends control {
 	 * @return void
 	 */
 	public function managePriv() {
-		$menu = '';
+		if (!empty($_POST)) {
+			$this->kevinlogin->updatePrivOfGroup();
+			die(js::reload('parent'));
+		}
+
 		$this->loadModel('group');
+		$menu = '';
 		foreach ($this->lang->resource as $moduleName => $action) {
 			if ($this->group->checkMenuModule($menu, $moduleName)) {
 				$this->app->loadLang($moduleName);
 			}
 		}
 
-		if (!empty($_POST)) {
-			$this->kevinlogin->updatePrivOfGroup();
-			die(js::reload('parent'));
-		}
-		$this->view->title		 = $this->lang->company->common . $this->lang->colon . $this->lang->kevinlogin->managepriv;
+		$this->view->title		 = $this->lang->kevinlogin->common . $this->lang->colon . $this->lang->kevinlogin->managepriv;
 		$this->view->position[]	 = $this->lang->kevinlogin->managepriv;
 
 		foreach ($this->lang->resource as $module => $moduleActions) {

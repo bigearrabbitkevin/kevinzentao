@@ -11,19 +11,27 @@
  */
  $this->moduleName= "kevinuser";//第一级标签
 
+$groupList[''] = '所有';
+ foreach($lang->menu as $module => $title):
+	 $groupList[$module] =  substr($title, 0, strpos($title, '|'));
+endforeach;
+$groupList['other'] = '其它';
+
 ?>
 <?php include '../../kevincom/view/header.html.php'; ?>
-<div class='container mw-900px'>
+<div class='container '>
 	<form class='form-condensed' method='post' target='hiddenwin'>
 		<table class='table table-form'>
 			<tr class='text-center'>
-				<td class='strong'><?php echo $lang->group->module; ?></td>
-				<td class='strong'><?php echo $lang->group->method; ?></td>
-				<td class='strong'><?php echo $lang->group->common; ?></td>
+				<td class='strong w-p15'>Group</td>
+				<td class='strong w-p30'><?php echo $lang->group->module; ?></td>
+				<td class='strong w-p30'><?php echo $lang->group->method; ?></td>
+				<td class='strong w-p30'><?php echo $lang->group->common; ?></td>
 			</tr>
 			<tr>
-				<td class='w-p30'><?php echo html::select('module', $modules, $this->session->chosenmodule, "onchange='setModuleActions(this.value)' size=\"10\" style='height:500px' class='form-control'"); ?></td>
-				<td class='w-p30' id='actionBox'>
+				<td><?php echo html::select('byGroup', $groupList, '', "onchange='setModuleGroup(this.value)' size=\"10\" style='height:500px' class='form-control'"); ?></td>
+				<td><?php echo html::select('module', $modules, $this->session->chosenmodule, "onchange='setModuleActions(this.value)' size=\"10\" style='height:500px' class='form-control'"); ?></td>
+				<td id='actionBox'>
 					<?php
 					$class = '';
 					foreach ($actions as $module => $moduleActions) {
@@ -48,13 +56,7 @@
 </div>
 <?php include '../../kevincom/view/footer.html.php'; ?>
 <script language='Javascript'>
-	/**
-	 * Control the actions select control for a module.
-	 * 
-	 * @param   string $module 
-	 * @access  public
-	 * @return  void
-	 */
+	var grouplist = '<?php  echo json_encode($lang->menugroup);?>';
 	var chosenmodule = document.getElementById('module').value;
 	var chosenmethod='<?php echo $this->session->chosenmethod;?>';
 	setModuleActions(chosenmodule);

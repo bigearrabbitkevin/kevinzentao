@@ -29,7 +29,7 @@ $groupList['other'] = '其它';
 				<td class='strong w-p30'><?php echo $lang->group->common; ?></td>
 			</tr>
 			<tr>
-				<td><?php echo html::select('byGroup', $groupList, '', "onchange='setModuleGroup(this.value)' size=\"10\" style='height:500px' class='form-control'"); ?></td>
+				<td><?php echo html::select('byGroup', $groupList, '', "onchange='managepriv_SelectGroup(this.value)' size=\"10\" style='height:500px' class='form-control'"); ?></td>
 				<td><?php echo html::select('module', $modules, $this->session->chosenmodule, "onchange='setModuleActions(this.value)' size=\"10\" style='height:500px' class='form-control'"); ?></td>
 				<td id='actionBox'>
 					<?php
@@ -57,23 +57,7 @@ $groupList['other'] = '其它';
 <?php include '../../kevincom/view/footer.html.php'; ?>
 <script language='Javascript'>
 	var grouplist = '<?php  echo json_encode($lang->menugroup);?>';
-	var chosenmodule = document.getElementById('module').value;
 	var chosenmethod='<?php echo $this->session->chosenmethod;?>';
-	setModuleActions(chosenmodule);
-	getMethodPrivs(chosenmethod);
-	function setModuleActions(module)
-	{
-		$('#actionBox select').addClass('hidden');          // Hide all select first.
-		$('#actionBox select').val('');                     // Unselect all select.
-		$('.' + module + 'Actions').removeClass('hidden');  // Show the action control for current module.
-	}
-	function getMethodPrivs(method) {
-		var module = document.getElementById('module').value;
-		link = createLink('kevinlogin', 'ajaxGetGroupPrivsByMethod', 'module=' + module + '&method=' + method);
-		$('.' + module + 'Actions').find("option[value='"+method+"']").attr('selected',true);
-		$('#groupsBox').load(link, function() {
-			$('groups[]').chosen(defaultChosenOptions);
-		});
-	}
+
 </script>
 

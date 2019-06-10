@@ -226,16 +226,28 @@ class kevinloginModel extends model {
 	 * @return void
 	 */
 	public function updatePrivOfGroup() {
+		$ret = new stdClass();
+		$ret->errcode = 99;
 		$module	 = $this->post->module;
 		$method = $this->post->actions;
-		if ($module == false or $method == false) return false; //no module or $method
+		$groups =$this->post->groups;
+
+		$ret->data = new stdClass();
+		$ret->data->module = $module;
+		$ret->data->method = $method;
+		$ret->data->groups = $groups;
+
+		//no module or $method
+		if ($module == false or $method == false) {
+			$ret->errmsg = "Please select a molule and a method!";
+			return $ret;
+		}
 		//1,删除权限
 		$this->dao->delete()->from(TABLE_GROUPPRIV)
 				->where('module')->eq($module)
 				->andWhere('method')->eq($method)->exec();
 		//2,插入权限
 		$data	 = new stdclass();
-		$groups =$this->post->groups;
 		foreach ($groups as $group) {
 			$data->group	 = $group;
 			$data->module	 = $module;
@@ -244,7 +256,8 @@ class kevinloginModel extends model {
 					->data($data)
 					->exec();
 		}
-		return true;
+		$ret->errcode = 0;
+		return $ret;
 	}
 
 	public function updatePwd($id, $password) {

@@ -111,8 +111,8 @@ class kevinlogin extends control {
 	 */
 	public function managePriv() {
 		if (!empty($_POST)) {
-			$this->kevinlogin->updatePrivOfGroup();
-			die(js::reload('parent'));
+			$ret = $this->kevinlogin->updatePrivOfGroup();
+			die(json_encode($ret));
 		}
 
 		$this->loadModel('group');

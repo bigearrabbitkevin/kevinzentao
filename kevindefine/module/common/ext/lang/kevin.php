@@ -25,6 +25,7 @@ $lang->kevin->menu->kevinstore		 = array('link' => '仓库|kevinstore|itemlist',
 $lang->kevin->menu->kevinsvn		 = array('link' => 'SVN|kevinsvn|index', 'alias' => 'index,authz,account,statistic');
 $lang->kevin->menu->kevinclass		 = array('link' => '分类|kevinclass|index', 'alias' => 'book,help');
 $lang->kevin->menu->kevinuser		 = array('link' => '用户|kevinuser|classlist', 'alias' => 'index,classlist,recordlist,deptlist,defaultpwd,managepriv,domainaccount');
+$lang->kevin->menu->kevinerrcode		 = array('link' => '错误码|kevinerrcode|index', 'alias' => '');
 
 $lang->kevin->menuOrder[5]	 = 'index';
 $lang->kevin->menuOrder[20]	 = 'kevindevice';
@@ -36,6 +37,7 @@ $lang->kevin->menuOrder[70]	 = 'kevinchart';
 $lang->kevin->menuOrder[80]	 = 'kevinsvn';
 $lang->kevin->menuOrder[90]	 = 'kevinclass';
 $lang->kevin->menuOrder[100] = 'kevinuser';
+$lang->kevin->menuOrder[110]	 = 'kevinerrcode';
 
 //menugroup menu for kevincom----------------
 $lang->menugroup->kevinchart	 = 'kevincom';
@@ -48,6 +50,7 @@ $lang->menugroup->kevinclass	 = 'kevincom';
 $lang->menugroup->kevinstore	 = 'kevincom';
 $lang->menugroup->kevinuser		 = 'kevincom';
 $lang->menugroup->kevinlogin	 = 'kevincom';
+$lang->menugroup->kevinerrcode	 = 'kevincom';
 
 //menugroup menu ----------------
 $lang->menugroup->kevindefine	 = 'kevincom';
@@ -80,6 +83,14 @@ $lang->kevincalendar->menuOrder[10]	 = 'index';
 $lang->kevincalendar->menuOrder[20]	 = 'log';
 $lang->kevincalendar->menuOrder[30]	 = 'todo';
 $lang->kevincalendar->menuOrder[40]	 = 'lists';
+
+//--Plugin------kevinerrcode------------------------------
+$lang->kevinerrcode		 = new stdclass();
+$lang->kevinerrcode->menu	 = new stdclass();
+
+//menu list
+$lang->kevinerrcode->menu->index	 = '错误码|kevinerrcode|index';
+$lang->kevinerrcode->menuOrder[10]	 = 'index';
 
 //--Plugin------kevinchart------------------------------
 $lang->kevinchart		 = new stdclass();

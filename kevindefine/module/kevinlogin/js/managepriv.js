@@ -16,7 +16,6 @@ function setModuleActions(module) {
 
 function getMethodPrivs(method) {
 	g_method = method;
-	g_module = document.getElementById('module').value;
 
 	if( module == '') return;
 	link = createLink('kevinlogin', 'ajaxGetGroupPrivsByMethod', 'module=' + g_module + '&method=' + method);

@@ -68,7 +68,6 @@ define('TABLE_KEVINCLASS_ITEM',          '`kv_class_item`');
 
 $config->objectTables['kevinclass_item']        = TABLE_KEVINCLASS_ITEM;
 
-
 $prefix = 'kv_user_';
 define('TABLE_KEVIN_USER_CLASS',          '`' . $prefix . 'class`');
 define('TABLE_KEVIN_USER_RECORD',          '`' . $prefix . 'record`');
@@ -83,3 +82,7 @@ $config->objectTables['defaultpassword']        = TABLE_DEFAULTPASSWORD;
 //db
 define('TABLE_KEVIN_LDAPUSER',     '`kv_ldapuser`');
 $config->objectTables['kv_ldapuser']        = TABLE_KEVIN_LDAPUSER;
+
+//db TABLE_KEVINERRCODE
+define('TABLE_KEVINERRCODE',          '`kv_errcode`');
+$config->objectTables['kevinerrcode']        = TABLE_KEVINERRCODE;

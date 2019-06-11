@@ -19,8 +19,9 @@ $groupList['other'] = '其它';
 
 ?>
 <?php include '../../kevincom/view/header.html.php'; ?>
+<?php include '../../common/view/chosen.html.php';?>
 <div class='container '>
-	<form class='form-condensed' method='post' target='hiddenwin'>
+	<form class='form-condensed' method='post' target='hiddenwin' id="form_managepriv">
 		<table class='table table-form'>
 			<tr class='text-center'>
 				<td class='strong w-p15'>Group</td>
@@ -40,12 +41,12 @@ $groupList['other'] = '其它';
 					}
 					?>
 				</td>
-				<td id="groupsBox"><?php echo html::select('groups[]', $groups, $this->session->chosengpstr, "multiple='multiple' size='10' style='height:500px' class='form-control'"); ?></td>
+				<td id="groupsBox"><?php echo html::select('groups[]', $groups, $this->session->chosengpstr, "multiple='multiple' size='10' style='height:500px' class=' chosen multiple form-control'"); ?></td>
 			</tr>
 			<tr>
 				<td class='text-center' colspan='3'>
+					<button type="button" onclick="managepriv_submit()" class="btn btn-primary"><?php echo $lang->save; ?></button>
 					<?php
-					echo html::submitButton($lang->save);
 					echo html::linkButton($lang->goback, $this->createLink('group', 'browse'));
 					echo html::hidden('foo'); // Just make $_POST not empty..
 					?>
@@ -55,9 +56,10 @@ $groupList['other'] = '其它';
 	</form>
 </div>
 <?php include '../../kevincom/view/footer.html.php'; ?>
+<script src="<?php echo $jsRoot; ?>kevin/kevin.js"></script>
 <script language='Javascript'>
 	var grouplist = '<?php  echo json_encode($lang->menugroup);?>';
-	var chosenmethod='<?php echo $this->session->chosenmethod;?>';
+	var g_method='<?php echo $this->session->chosenmethod;?>';
 
 </script>
 

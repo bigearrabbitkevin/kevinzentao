@@ -166,3 +166,27 @@ function kevin_kendogrid_updateGridData() {
 		}
 	});
 }
+
+//-----------------------------------
+//-获得form的数据，form Post的参数模式.
+//$(iName) : $("#form1")--------------------
+//-----------------------------------
+function kevin_serializeArray(iName) {
+	var d = {};
+	var t = $(iName).serializeArray();
+	$.each(t,function() {
+		if(d.hasOwnProperty(this.name)){
+			//说明是数组
+			if(typeof d[this.name] != 'object'){
+				oldvalue = d[this.name];
+				d[this.name]=[];
+				d[this.name].push(oldvalue);
+			}
+
+			d[this.name].push(this.value);
+		} else {
+			d[this.name] = this.value;
+		}
+	});
+	return d;
+}

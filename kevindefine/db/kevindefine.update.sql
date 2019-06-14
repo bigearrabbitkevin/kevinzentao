@@ -199,23 +199,24 @@ MODIFY COLUMN `locked`  enum('draft','lock') CHARACTER SET utf8 COLLATE utf8_gen
 
 #default recordbefor100 for  kv_errcode
 #2019-6-14
-INSERT INTO `kv_errcode` (`id`, `project`, `name`, `nameEn`, `status`, `description`, `createdBy`, `createdDate`) VALUES ('0', '0', '正常', 'Success', '200', '正常返回值', 'haihuay', '2019-06-11 12:49:00');
+INSERT INTO `kv_errcode` (`id`, `project`, `name`, `nameEn`, `status`, `description`, `createdBy`, `createdDate`) VALUES ('0', '0', '正常', 'Success', '200', '正常返回值', 'kevin', '2019-06-11 12:49:00');
 UPDATE kv_errcode set id = 0 where name = '正常';
-INSERT INTO `kv_errcode` (`id`, `project`, `name`, `nameEn`, `status`, `description`, `createdBy`, `createdDate`) VALUES ('1', '0', '未知错误', 'unknown error', '200', '', 'haihuay', '2019-06-11 12:49:00');
-INSERT INTO `kv_errcode` (`id`, `project`, `name`, `nameEn`, `status`, `description`, `createdBy`, `createdDate`) VALUES ('2', '0', '运行时错误', 'Runtime Error', '200', '', 'haihuay', '2019-06-11 12:49:00');
-INSERT INTO `kv_errcode` (`id`, `project`, `name`, `nameEn`, `status`, `description`, `createdBy`, `createdDate`) VALUES ('10', '0', '没有查询到输入id的条目', 'Can not find the item with input id.', '200', '', 'haihuay', '2019-06-11 12:49:00');
-INSERT INTO `kv_errcode` (`id`, `project`, `name`, `nameEn`, `status`, `description`, `createdBy`, `createdDate`) VALUES ('11', '0', '参数输入不足', 'Parameters are not enough.', '200', '', 'haihuay', '2019-06-11 12:49:00');
-INSERT INTO `kv_errcode` (`id`, `project`, `name`, `nameEn`, `status`, `description`, `createdBy`, `createdDate`) VALUES ('12', '0', '更新出错', 'Update failed', '200', '', 'haihuay', '2019-06-11 12:49:00');
-INSERT INTO `kv_errcode` (`id`, `project`, `name`, `nameEn`, `status`, `description`, `createdBy`, `createdDate`) VALUES ('13', '0', '创建出错', 'Create failed', '200', '', 'haihuay', '2019-06-11 12:49:00');
-INSERT INTO `kv_errcode` (`id`, `project`, `name`, `nameEn`, `status`, `description`, `createdBy`, `createdDate`) VALUES ('14', '0', '保存出错', 'Save failed', '200', '', 'haihuay', '2019-06-11 12:49:00');
-INSERT INTO `kv_errcode` (`id`, `project`, `name`, `nameEn`, `status`, `description`, `createdBy`, `createdDate`) VALUES ('15', '0', '查询出错', 'Error when select ittems.', '200', '', 'haihuay', '2019-06-11 18:27:31');
-INSERT INTO `kv_errcode` (`id`, `project`, `name`, `nameEn`, `status`, `description`, `createdBy`, `createdDate`) VALUES ('20', '0', 'errcode类：没有errcode参数', 'errcode object: no errcode parameter', '200', '', 'haihuay', '2019-06-11 12:49:00');
-INSERT INTO `kv_errcode` (`id`, `project`, `name`, `nameEn`, `status`, `description`, `createdBy`, `createdDate`) VALUES ('21', '0', 'errcode类：没有errmsg参数', 'errcode object: no errmsg parameter', '200', '', 'haihuay', '2019-06-11 12:49:00');
-INSERT INTO `kv_errcode` (`id`, `project`, `name`, `nameEn`, `status`, `description`, `createdBy`, `createdDate`) VALUES ('22', '0', 'errcode类：没有data参数', 'errcode object: no data parameter', '200', '', 'haihuay', '2019-06-11 12:49:00');
-INSERT INTO `kv_errcode` (`id`, `project`, `name`, `nameEn`, `status`, `description`, `createdBy`, `createdDate`) VALUES ('50', '0', '登陆失败', 'Login failed', '200', '', 'haihuay', '2019-06-11 12:49:00');
-INSERT INTO `kv_errcode` (`id`, `project`, `name`, `nameEn`, `status`, `description`, `createdBy`, `createdDate`) VALUES ('51', '0', '用户或密码错误', 'User or password Error', '200', '', 'haihuay', '2019-06-11 12:49:00');
-INSERT INTO `kv_errcode` (`id`, `project`, `name`, `nameEn`, `status`, `description`, `createdBy`, `createdDate`) VALUES ('52', '0', '帐号过短', 'Account is too short.', '200', '', 'haihuay', '2019-06-11 12:49:00');
-INSERT INTO `kv_errcode` (`id`, `project`, `name`, `nameEn`, `status`, `description`, `createdBy`, `createdDate`) VALUES ('53', '0', '密码过短', 'Password is too short.', '200', '', 'haihuay', '2019-06-11 12:49:00');
-INSERT INTO `kv_errcode` (`id`, `project`, `name`, `nameEn`, `status`, `description`, `createdBy`, `createdDate`) VALUES ('54', '0', '用户没有登陆', 'User is not login', '200', '', 'haihuay', '2019-06-11 12:49:00');
-INSERT INTO `kv_errcode` (`id`, `project`, `name`, `nameEn`, `status`, `description`, `createdBy`, `createdDate`) VALUES ('55', '0', '用户不能使用login函数，因为不是访客', 'user can not use the login function.He is not the', '200', '', 'haihuay', '2019-06-11 12:49:00');
-INSERT INTO `kv_errcode` (`id`, `project`, `name`, `nameEn`, `status`, `description`, `createdBy`, `createdDate`) VALUES ('56', '0', '帐号被锁定', 'Account is locked!', '200', '', 'haihuay', '2019-06-11 12:49:00');
+INSERT INTO `kv_errcode` (`id`, `project`, `name`, `nameEn`, `status`, `description`, `createdBy`, `createdDate`) VALUES ('1', '0', '未知错误', 'unknown error', '200', '', 'kevin', '2019-06-11 12:49:00');
+INSERT INTO `kv_errcode` (`id`, `project`, `name`, `nameEn`, `status`, `description`, `createdBy`, `createdDate`) VALUES ('2', '0', '运行时错误', 'Runtime Error', '200', '', 'kevin', '2019-06-11 12:49:00');
+INSERT INTO `kv_errcode` (`id`, `project`, `name`, `nameEn`, `status`, `description`, `createdBy`, `createdDate`) VALUES ('10', '0', '没有查询到输入id的条目', 'Can not find the item with input id.', '200', '', 'kevin', '2019-06-11 12:49:00');
+INSERT INTO `kv_errcode` (`id`, `project`, `name`, `nameEn`, `status`, `description`, `createdBy`, `createdDate`) VALUES ('11', '0', '参数输入不足', 'Parameters are not enough.', '200', '', 'kevin', '2019-06-11 12:49:00');
+INSERT INTO `kv_errcode` (`id`, `project`, `name`, `nameEn`, `status`, `description`, `createdBy`, `createdDate`) VALUES ('12', '0', '更新出错', 'Update failed', '200', '', 'kevin', '2019-06-11 12:49:00');
+INSERT INTO `kv_errcode` (`id`, `project`, `name`, `nameEn`, `status`, `description`, `createdBy`, `createdDate`) VALUES ('13', '0', '创建出错', 'Create failed', '200', '', 'kevin', '2019-06-11 12:49:00');
+INSERT INTO `kv_errcode` (`id`, `project`, `name`, `nameEn`, `status`, `description`, `createdBy`, `createdDate`) VALUES ('14', '0', '保存出错', 'Save failed', '200', '', 'kevin', '2019-06-11 12:49:00');
+INSERT INTO `kv_errcode` (`id`, `project`, `name`, `nameEn`, `status`, `description`, `createdBy`, `createdDate`) VALUES ('15', '0', '查询出错', 'Error when select ittems.', '200', '', 'kevin', '2019-06-11 18:27:31');
+INSERT INTO `kv_errcode` (`id`, `project`, `name`, `nameEn`, `status`, `description`, `createdBy`, `createdDate`) VALUES ('20', '0', 'errcode类：没有errcode参数', 'errcode object: no errcode parameter', '200', '', 'kevin', '2019-06-11 12:49:00');
+INSERT INTO `kv_errcode` (`id`, `project`, `name`, `nameEn`, `status`, `description`, `createdBy`, `createdDate`) VALUES ('21', '0', 'errcode类：没有errmsg参数', 'errcode object: no errmsg parameter', '200', '', 'kevin', '2019-06-11 12:49:00');
+INSERT INTO `kv_errcode` (`id`, `project`, `name`, `nameEn`, `status`, `description`, `createdBy`, `createdDate`) VALUES ('22', '0', 'errcode类：没有data参数', 'errcode object: no data parameter', '200', '', 'kevin', '2019-06-11 12:49:00');
+INSERT INTO `kv_errcode` (`id`, `project`, `name`, `nameEn`, `status`, `description`, `createdBy`, `createdDate`) VALUES ('50', '0', '登陆失败', 'Login failed', '200', '', 'kevin', '2019-06-11 12:49:00');
+INSERT INTO `kv_errcode` (`id`, `project`, `name`, `nameEn`, `status`, `description`, `createdBy`, `createdDate`) VALUES ('51', '0', '用户或密码错误', 'User or password Error', '200', '', 'kevin', '2019-06-11 12:49:00');
+INSERT INTO `kv_errcode` (`id`, `project`, `name`, `nameEn`, `status`, `description`, `createdBy`, `createdDate`) VALUES ('52', '0', '帐号过短', 'Account is too short.', '200', '', 'kevin', '2019-06-11 12:49:00');
+INSERT INTO `kv_errcode` (`id`, `project`, `name`, `nameEn`, `status`, `description`, `createdBy`, `createdDate`) VALUES ('53', '0', '密码过短', 'Password is too short.', '200', '', 'kevin', '2019-06-11 12:49:00');
+INSERT INTO `kv_errcode` (`id`, `project`, `name`, `nameEn`, `status`, `description`, `createdBy`, `createdDate`) VALUES ('54', '0', '用户没有登陆', 'User is not login', '200', '', 'kevin', '2019-06-11 12:49:00');
+INSERT INTO `kv_errcode` (`id`, `project`, `name`, `nameEn`, `status`, `description`, `createdBy`, `createdDate`) VALUES ('55', '0', '用户不能使用login函数，因为不是访客', 'user can not use the login function.He is not the', '200', '', 'kevin', '2019-06-11 12:49:00');
+INSERT INTO `kv_errcode` (`id`, `project`, `name`, `nameEn`, `status`, `description`, `createdBy`, `createdDate`) VALUES ('56', '0', '帐号被锁定', 'Account is locked!', '200', '', 'kevin', '2019-06-11 12:49:00');
+INSERT INTO `kv_errcode` (`id`, `project`, `name`, `nameEn`, `status`, `description`, `createdBy`, `createdDate`) VALUES ('1000', '0', '自定义的错误', '', '200', '', 'kevin', '2019-06-11 12:49:00');

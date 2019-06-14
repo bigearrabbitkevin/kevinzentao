@@ -109,6 +109,7 @@ function kevin_CheckJsonReturnData(iData) {
 	}
 
 	if (!(iData.hasOwnProperty("errcode"))) {
+		ret.errcode = 20;
 		ret.errmsg = 'Error! No errcode property in json!';
 		return ret;
 	}
@@ -117,6 +118,7 @@ function kevin_CheckJsonReturnData(iData) {
 		return ret;
 	}
 	if (!(iData.hasOwnProperty("data"))) {
+		ret.errcode = 22;
 		ret.errmsg = 'Error! No Data property in json!';
 		return ret;
 	}

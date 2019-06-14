@@ -13,13 +13,14 @@
 			<?php $vars				 = "param=$param&type=$type&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}";?>
 			<th class='w-id'><?php common::printorderlink('id', $orderBy, $vars, $lang->idAB);?></th>
 			<th class='w-auto'><?php common::printOrderLink('name', $orderBy, $vars, $lang->kevindevice->name);?></th>
+			<th class='w-100px'><?php common::printOrderLink('tcpip', $orderBy, $vars, $lang->kevindevice->tcpip);?></th>
 			<th class='w-50px'><?php echo $lang->kevindevice->yearlimit;?></th>
 			<th class='w-auto'><?php common::printOrderLink('purpose', $orderBy, $vars, $lang->kevindevice->purpose);?></th>
+			<th class='w-80px'><?php common::printOrderLink('user', $orderBy, $vars, $lang->kevindevice->user);?></th>
+			<th class='w-80px'><?php common::printOrderLink('charge', $orderBy, $vars, $lang->kevindevice->charge);?></th>
 			<th class='w-100px'><?php common::printOrderLink('dept', $orderBy, $vars, $lang->kevindevice->dept);?></th>
 			<th class='w-user'><?php common::printOrderLink('type', $orderBy, $vars, $lang->kevindevice->type);?></th>
 			<th class='w-80px'><?php common::printOrderLink('status', $orderBy, $vars, $lang->kevindevice->status);?></th>
-			<th class='w-80px'><?php common::printOrderLink('charge', $orderBy, $vars, $lang->kevindevice->charge);?></th>
-			<th class='w-100px'><?php common::printOrderLink('tcpip', $orderBy, $vars, $lang->kevindevice->tcpip);?></th>
 			<th class='w-250px'><?php common::printOrderLink('description', $orderBy, $vars, $lang->kevindevice->desc);?></th>
 			<th class='w-100px'><?php common::printOrderLink('repairend', $orderBy, $vars, $lang->kevindevice->repairend); ?></th>
 			<th class='w-100px'><?php common::printOrderLink('join', $orderBy, $vars, $lang->kevindevice->join);?></th>
@@ -54,7 +55,7 @@
 				$datestyle	 = "color: green;";
 			}
 			?>
-			<tr class='text-center' style='<?php echo $linestyle;?>'>
+			<tr class='text-center' >
 				<td>
 					<?php
 					if ($canBatchEdit or $canManageContacts) echo "<input type='checkbox' name='devices[]' value='$device->name'> ";
@@ -62,13 +63,14 @@
 					?>
 				</td>
 				<td><?php if (!common::printLink('kevindevice', 'devview', "id=$device->id", $device->name)) echo $device->name;?></td>
-				<td style="<?php echo $datestyle;?>"><?php echo $device->yearlimit;?></td>
-				<td><?php echo $device->purpose;?></td>
+				<td><?php echo $device->tcpip;?></td>
+				<td style="<?php echo $linestyle . ' ' . $datestyle;?>"><?php echo $device->yearlimit;?></td>
+				<td><?php echo $device->purpose;?></td>	
+				<td><?php echo (isset($users[$device->user])) ? $users[$device->user] : $device->user;?></td>
+				<td><?php echo (isset($users[$device->charge])) ? $users[$device->charge] : $device->charge;?></td>
 				<td><?php echo $device->deptName;?></td>
 				<td><?php echo $lang->kevindevice->DevTypeList[$device->type];?></td>
 				<td><?php echo $lang->kevindevice->StatusList[$device->status];?></td>
-				<td><?php echo (isset($users[$device->charge])) ? $users[$device->charge] : '';?></td>
-				<td><?php echo $device->tcpip;?></td>
 				<td><?php echo $device->description;?></td>
 				<td style=<?php echo $endstyle?>><?php echo ($device->repairend == "0000-00-00")? "":$device->repairend; ?></td>
 				<td><?php echo ($device->join == "0000-00-00") ? "" : $device->join;?></td>

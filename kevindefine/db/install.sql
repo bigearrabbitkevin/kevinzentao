@@ -624,3 +624,21 @@ CREATE TABLE IF NOT EXISTS `kv_ldapuser` (
   UNIQUE KEY `kv_lapuser_domain_remote` (`domain`,`remote`),
   KEY `kv_lapuser_remote` (`remote`)
 ) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
+
+
+-- ----------------------------
+-- Table structure for kv_errcode
+-- ----------------------------
+CREATE TABLE IF NOT EXISTS `kv_errcode` (
+  `id` mediumint(9) NOT NULL AUTO_INCREMENT,
+  `project` mediumint(8) unsigned NOT NULL DEFAULT '0',
+  `name` varchar(50) NOT NULL DEFAULT '',
+  `nameEn` char(50) NOT NULL DEFAULT '',
+  `status` int(11) NOT NULL DEFAULT '100' COMMENT 'status',
+  `description` varchar(255) NOT NULL DEFAULT '',
+  `createdBy` varchar(30) NOT NULL DEFAULT '',
+  `createdDate` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `name` (`name`) USING BTREE,
+  KEY `nameEn` (`nameEn`)
+) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;

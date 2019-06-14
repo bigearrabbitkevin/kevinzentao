@@ -294,7 +294,7 @@ class kevindevice extends control {
 		}
 
 		$this->loadModel("user");
-		$this->view->users		 = $this->user->getPairs();
+		$this->view->users		 = $this->user->getPairs('noletter');
 		$this->view->showStyle	 = $kevin_showStyle;
 
 		//$userQuery = ;

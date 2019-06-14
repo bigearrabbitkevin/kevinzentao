@@ -5,6 +5,7 @@
 			<th class='w-50px'><?php common::printorderlink('id', $orderBy, $vars, $lang->idAB); ?></th>
 			<th class='w-60px'><?php echo $lang->actions; ?></th>
 			<th class='w-120px'><?php common::printOrderLink('name', $orderBy, $vars, $lang->kevindevice->name); ?></th>
+			<th class='w-200px'><?php common::printOrderLink('tcpip', $orderBy, $vars, $lang->kevindevice->tcpip); ?></th>			
 			<th class='w-50px'><?php echo $lang->kevindevice->yearlimit;?></th>
 			<th class='w-120px'><?php common::printOrderLink('label', $orderBy, $vars, $lang->kevindevice->label); ?></th>
 			<th class='w-80px'><?php common::printOrderLink('group', $orderBy, $vars, $lang->kevindevice->group); ?></th>
@@ -13,7 +14,6 @@
 			<th class='w-100px'><?php common::printOrderLink('user', $orderBy, $vars, $lang->kevindevice->user); ?></th>
 			<th class='w-100px'><?php common::printOrderLink('charge', $orderBy, $vars, $lang->kevindevice->charge); ?></th>
 			<th class='w-80px'><?php common::printOrderLink('dept', $orderBy, $vars, $lang->kevindevice->dept); ?></th>
-			<th class='w-200px'><?php common::printOrderLink('tcpip', $orderBy, $vars, $lang->kevindevice->tcpip); ?></th>
 			<th class='w-120px'><?php common::printOrderLink('manageip', $orderBy, $vars, $lang->kevindevice->manageip); ?></th>
 			<th class='w-80px'><?php common::printOrderLink('count', $orderBy, $vars, $lang->kevindevice->count); ?></th>
 			<th class='w-100px'><?php common::printOrderLink('cpuID', $orderBy, $vars, $lang->kevindevice->cpuID); ?></th>
@@ -62,8 +62,8 @@
 				$datestyle	 = "color: green;";
 			}
 			?>
-			<tr class='text-center' style="<?php echo $linestyle;?>">
-				<td>
+			<tr class='text-center'">
+				<td>333
 					<?php
 					if ($canBatchEdit or $canManageContacts) echo "<input type='checkbox' name='devices[]' value='$device->name'> ";
 					printf('%03d', $device->id);
@@ -81,15 +81,15 @@
 					?>
 				</td>
 				<td><?php if (!common::printLink('kevindevice', 'devview', "id=$device->id", $device->name)) echo $device->name; ?></td>
-				<td style="<?php echo $datestyle;?>"><?php echo $device->yearlimit;?></td>
+				<td><?php echo $device->tcpip; ?></td>
+				<td style="<?php echo $linestyle . ' ' . $datestyle;?>"><?php echo $device->yearlimit;?></td>
 				<td><?php echo $device->label; ?></td>
 				<td><?php echo $device->groupName; ?></td>
 				<td><?php echo $lang->kevindevice->DevTypeList[$device->type]; ?></td>
 				<td><?php echo $lang->kevindevice->StatusList[$device->status]; ?></td>
-				<td><?php  if($device->user){$enuser=str_split($device->user);echo strtoupper($enuser[0]).':'.$device->user; }?></td>
-				<td><?php if(isset($users[$device->charge]))echo $users[$device->charge]; ?></td>
+				<td><?php echo (isset($users[$device->user])) ? $users[$device->user] : $device->user;?></td>
+				<td><?php echo (isset($users[$device->charge])) ? $users[$device->charge] : $device->charge;?></td>
 				<td><?php echo $device->deptName; ?></td>
-				<td><?php echo $device->tcpip; ?></td>
 				<td><?php echo $device->manageip; ?></td>
 				<td><?php echo ($device->count==0)?'':$device->count; ?></td>
 				<td><?php echo $device->cpuID; ?></td>

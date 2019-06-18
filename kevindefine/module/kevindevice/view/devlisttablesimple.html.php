@@ -70,7 +70,7 @@
 				<td><?php echo (isset($users[$device->charge])) ? $users[$device->charge] : $device->charge;?></td>
 				<td><?php echo $device->deptName;?></td>
 				<td><?php echo $lang->kevindevice->DevTypeList[$device->type];?></td>
-				<td><?php echo $lang->kevindevice->StatusList[$device->status];?></td>
+				<td <?php if ( 'discard' == $device->status) echo 'style="background:yellow; "';?>><?php echo $lang->kevindevice->StatusList[$device->status];?></td>
 				<td><?php echo $device->description;?></td>
 				<td style=<?php echo $endstyle?>><?php echo ($device->repairend == "0000-00-00")? "":$device->repairend; ?></td>
 				<td><?php echo ($device->join == "0000-00-00") ? "" : $device->join;?></td>

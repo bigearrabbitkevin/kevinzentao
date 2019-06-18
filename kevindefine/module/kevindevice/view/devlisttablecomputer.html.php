@@ -63,7 +63,7 @@
 			}
 			?>
 			<tr class='text-center'">
-				<td>333
+				<td>
 					<?php
 					if ($canBatchEdit or $canManageContacts) echo "<input type='checkbox' name='devices[]' value='$device->name'> ";
 					printf('%03d', $device->id);
@@ -86,7 +86,7 @@
 				<td><?php echo $device->label; ?></td>
 				<td><?php echo $device->groupName; ?></td>
 				<td><?php echo $lang->kevindevice->DevTypeList[$device->type]; ?></td>
-				<td><?php echo $lang->kevindevice->StatusList[$device->status]; ?></td>
+				<td <?php if ( 'discard' == $device->status) echo 'style="background:yellow; "';?>><?php echo $lang->kevindevice->StatusList[$device->status];?></td>
 				<td><?php echo (isset($users[$device->user])) ? $users[$device->user] : $device->user;?></td>
 				<td><?php echo (isset($users[$device->charge])) ? $users[$device->charge] : $device->charge;?></td>
 				<td><?php echo $device->deptName; ?></td>

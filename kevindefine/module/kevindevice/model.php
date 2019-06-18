@@ -152,7 +152,6 @@ class kevindeviceModel extends model {
 					->leftJoin(TABLE_KEVINDEVICE_GROUP)->alias('b')->on('a.group = b.id')
 					->leftJoin(TABLE_DEPT)->alias('c')->on('a.dept = c.id')
 					->where('a.group')->eq((int) $groupID)
-					->andWhere('a.deleted')->eq(0)
 					->orderBy($orderBy)
 					->page($pager)
 					->fetchAll();
@@ -161,7 +160,6 @@ class kevindeviceModel extends model {
 		return $this->dao->select('a.*,b.name as groupName,c.name as deptName')->from(TABLE_KEVINDEVICE_DEVLIST)->alias('a')
 				->leftJoin(TABLE_KEVINDEVICE_GROUP)->alias('b')->on('a.group = b.id')
 				->leftJoin(TABLE_DEPT)->alias('c')->on('a.dept = c.id')
-				->Where('a.deleted')->eq(0)
 				->orderBy($orderBy)
 				->page($pager)
 				->fetchAll();

@@ -11,15 +11,15 @@ function setModuleActions(module) {
 	g_method = '';
 	$('#actionBox select').addClass('hidden');          // Hide all select first.
 	$('#actionBox select').val('');                     // Unselect all select.
-	$('.' + module + 'Actions').removeClass('hidden');  // Show the action control for current module.
+	$('.' + g_module + 'Actions').removeClass('hidden');  // Show the action control for current module.
 }
 
 function getMethodPrivs(method) {
 	g_method = method;
 
-	if( module == '') return;
-	link = createLink('kevinlogin', 'ajaxGetGroupPrivsByMethod', 'module=' + g_module + '&method=' + method);
-	$('.' + module + 'Actions').find("option[value='" + method + "']").attr('selected', true);
+	if( g_module == '') return;
+	link = createLink('kevinlogin', 'ajaxGetGroupPrivsByMethod', 'module=' + g_module + '&method=' + g_method);
+	$('.' + g_module + 'Actions').find("option[value='" + g_method + "']").attr('selected', true);
 	$('#groupsBox').load(link, function () {
 		$('#groups').chosen(defaultChosenOptions);
 	});
@@ -29,11 +29,35 @@ function getMethodPrivs(method) {
 //-组筛选--------------------
 //-----------------------------------
 function managepriv_SelectGroup() {
-	var byGroup = document.getElementById('byGroup').value;
-	alert('正在开发：' + byGroup);
 	//1、检查选中的组
+	var byGroup = document.getElementById('byGroup').value;
+	//console.log('filter By ' + byGroup);
+
+	var objModule = $("#module");
+	$("option", $("#module")).remove();  
+
 	//2、对列表module进行隐藏显示
-	//3、如果选中的module不是显示的，切换为第一个显示项
+	var selecedModule = '';
+
+	//模块列表筛选添加
+	$.each(g_modules,function(key,value){
+		isShow = false;
+		if(g_menugroup.hasOwnProperty(key)){
+			group = g_menugroup[key];
+			if(byGroup == '' || byGroup == group)	isShow = true;
+		}else {//no group
+			if(byGroup == 'other')isShow = true;
+		}
+		//添加显示
+		if(isShow){
+			//console.log("Add:"+key+"，"+"对应值："+value );
+			if(g_module == key) selecedModule = key;
+			objModule.append("<option value='" + key + "'" + (g_module == key ? " selected" : "") + ">" + value + "</option>");
+		}	
+
+	})
+	//3、更新当前的module
+	g_module = selecedModule;
 }
 
 //-----------------------------------

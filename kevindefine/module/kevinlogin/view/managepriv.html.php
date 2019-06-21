@@ -58,8 +58,10 @@ $groupList['other'] = '其它';
 <?php include '../../kevincom/view/footer.html.php'; ?>
 <script src="<?php echo $jsRoot; ?>kevin/kevin.js"></script>
 <script language='Javascript'>
-	var grouplist = '<?php  echo json_encode($lang->menugroup);?>';
 	var g_method='<?php echo $this->session->chosenmethod;?>';
+	var g_menugroup = <?php  echo json_encode($lang->menugroup);?>; //菜单组列表
+	var g_groupList = <?php  echo json_encode($groupList);?>;//组列表
+	var g_modules = <?php  echo json_encode($modules);?>; //模块列表
 
 </script>
 

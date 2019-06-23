@@ -52,9 +52,10 @@ class kevinerrcodeModel extends model {
 	 */
 	public function update($iData) {
 		$ret = kevin_create_new_errcode();
-		$id = isset($iData->id)?$iData->id:-1;;
-		$ret->data = $iData;
+		$id = isset($iData->id)?$iData->id:-1;
+		$ret->data  = new stdclass();
 		$ret->data->id = $id;
+		$ret->data->inputData = $iData;
 		if ($id <1) {
 			$ret->errcode = 10;
 			$ret->errmsg  = 'Please input an id which >0.';

@@ -13,12 +13,12 @@ install: |
   1. 通过禅道的插件管理来进行安装。
   2. 手工添加或修改数据库的列，具体见instal.sql
 releases:
-  2.7:
+  3.0:
     charge: free
     license: ZPL (http://zpl.pub/v1)
     changelog:
-         1.清理删除模块
-    date: 2018-09-14
+         1.添加kevinerrcode等，2、权限设定优化
+    date: 2019-06-23
     zentao:
       compatible: 8.4.1
       incompatible:

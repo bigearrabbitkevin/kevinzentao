@@ -632,6 +632,7 @@ CREATE TABLE IF NOT EXISTS `kv_ldapuser` (
 CREATE TABLE IF NOT EXISTS `kv_errcode` (
   `id` mediumint(9) NOT NULL AUTO_INCREMENT,
   `project` mediumint(8) unsigned NOT NULL DEFAULT '0',
+  `code` char(30) NOT NULL DEFAULT '' COMMENT 'code name',
   `name` varchar(50) NOT NULL DEFAULT '',
   `nameEn` char(50) NOT NULL DEFAULT '',
   `status` int(11) NOT NULL DEFAULT '100' COMMENT 'status',
@@ -639,6 +640,7 @@ CREATE TABLE IF NOT EXISTS `kv_errcode` (
   `createdBy` varchar(30) NOT NULL DEFAULT '',
   `createdDate` datetime NOT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `code` (`code`),
   KEY `name` (`name`) USING BTREE,
   KEY `nameEn` (`nameEn`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;

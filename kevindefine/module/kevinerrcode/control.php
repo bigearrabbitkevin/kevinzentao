@@ -5,12 +5,19 @@ class kevinerrcode extends control {
 	public function __construct() {
 		parent::__construct();
 	}
-
+	
+	/**
+	 * create.
+	 *
+	 * @access public
+	 * @return errcode Object
+	 */
 	public function create($date = '') {
 		$ret = kevin_create_new_errcode();
 		if (!empty($_POST)) {
 			$ret->data = fixer::input('post')->get();
 		}
+
 		if (empty($ret->data)) {
 			$ret->errcode = 11;
 			$ret->errmsg  = 'Post parameters are not enough';
@@ -26,23 +33,25 @@ class kevinerrcode extends control {
 
 		die(json_encode($ret));
 	}
-
+	
+	/**
+	 * edit.
+	 *
+	 * @access public
+	 * @return errcode Object
+	 */
 	public function edit() {
 		$ret = kevin_create_new_errcode();
-		if (!empty($_POST)) {
-			$ret->data = fixer::input('post')->get();
-		}
+		if (!empty($_POST)) $ret->data = fixer::input('post')->get();
 		if (empty($ret->data)) {
 			$ret->errcode = 11;
 			$ret->errmsg  = 'Post parameters are not enough';
 			die(json_encode($ret));
 		}
-		$this->kevinerrcode->update($ret->data);
-		if (dao::isError()) {
-			$ret->errcode = 13;
-			$ret->errmsg  = dao::getError(true);
-		} else {
-			$ret->data->newItem = $this->kevinerrcode->getById($iID);;
+		$data = fixer::input('post')->get();
+		$ret = $this->kevinerrcode->update($data);
+		if (0 == $ret->errcode) {//成功后检出新数据
+			$ret->data->newItem = $this->kevinerrcode->getById($ret->data->id);;
 		}
 
 		die(json_encode($ret));

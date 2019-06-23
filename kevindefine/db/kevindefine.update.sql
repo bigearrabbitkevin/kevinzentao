@@ -220,3 +220,8 @@ INSERT INTO `kv_errcode` (`id`, `project`, `name`, `nameEn`, `status`, `descript
 INSERT INTO `kv_errcode` (`id`, `project`, `name`, `nameEn`, `status`, `description`, `createdBy`, `createdDate`) VALUES ('55', '0', '用户不能使用login函数，因为不是访客', 'user can not use the login function.He is not the', '200', '', 'kevin', '2019-06-11 12:49:00');
 INSERT INTO `kv_errcode` (`id`, `project`, `name`, `nameEn`, `status`, `description`, `createdBy`, `createdDate`) VALUES ('56', '0', '帐号被锁定', 'Account is locked!', '200', '', 'kevin', '2019-06-11 12:49:00');
 INSERT INTO `kv_errcode` (`id`, `project`, `name`, `nameEn`, `status`, `description`, `createdBy`, `createdDate`) VALUES ('1000', '0', '自定义的错误', '', '200', '', 'kevin', '2019-06-11 12:49:00');
+#kv_errcode 2019-6-23
+ALTER TABLE `kv_errcode` ADD COLUMN `code`  char(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT 'code name' AFTER `project`;
+update kv_errcode set code = CONCAT('ERRCODE_',id);
+ALTER TABLE `kv_errcode` ADD UNIQUE INDEX (`code`);
+

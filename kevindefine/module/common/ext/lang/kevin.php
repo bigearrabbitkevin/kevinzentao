@@ -9,13 +9,13 @@ if (!isset($lang->kevincom)) {
 	$lang->kevin->menuOrder		 = array();
 }
 //--First Level menu------------------------------
-$lang->menu->kevincom	 = '<i class="icon-sitemap"></i> KV|kevincom|index';
+$lang->menu->kevincom	 = '小工具|kevincom|index';
 
 $lang->menuOrder[78] = 'kevincom';
 $lang->modalTip		 = "模态窗口";
 
 //--Second Level menu--kevin menu------------------------------
-$lang->kevin->menu->index			 = 'KEVIN|kevincom|index';
+$lang->kevin->menu->index			 = '小工具|kevincom|index';
 $lang->kevin->menu->kevincalendar	 = array('link' => '日历|kevincalendar|todo', 'alias' => 'index,log,todo,lists');
 $lang->kevin->menu->kevinchart		 = array('link' => 'Echarts|kevinchart|index', 'alias' => 'index,itemlist,mychart');
 $lang->kevin->menu->kevinsoft		 = array('link' => '软件|kevinsoft|softlist', 'alias' => 'softlist,versionlist,groupversionlist,index,modulelist,filelist,statistic');
@@ -56,7 +56,7 @@ $lang->menugroup->kevinerrcode	 = 'kevincom';
 $lang->menugroup->kevindefine	 = 'kevincom';
 
 //--Plugin------kevincom------------------------------
-$lang->kevincom->menu->index	 = 'KEVIN插件|kevincom|index';
+$lang->kevincom->menu->index	 = '首页|kevincom|index';
 $lang->kevincom->menu->bomcheck	 = 'Bom检查|kevincom|bomcheck';
 
 $lang->kevincom->menuOrder[10]	 = 'index';

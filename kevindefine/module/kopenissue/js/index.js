@@ -10,33 +10,33 @@ $(document).ready(function () {
 	$("#grid").kendoGrid();//初步的初始化
 
 	//设定输出Excel的文件名
-	kevin_kendogrid_fileName = 'kevinerrcode_Kendo_UI_Grid_Export_' + kevin_today + '.xlsx';
+	kevin_kendogrid_fileName = 'kopenissue_Kendo_UI_Grid_Export_' + kevin_today + '.xlsx';
 
 	//统一的工具条设定
 	kevin_kendogrid_toolbar =
 		[
-			{template: kendo.template($("#kevinerrcode_list").html())},
-			{template: kendo.template($("#kevinerrcode_create").html())},
+			{template: kendo.template($("#kopenissue_list").html())},
+			{template: kendo.template($("#kopenissue_create").html())},
 			"excel"
 		];
 	//初始化
-	kevinerrcode_details_initial();
+	kopenissue_details_initial();
 
 	//默认加载List
-	kevinerrcode_list();
+	kopenissue_list();
 
 });
 
 //----------------------------
-//functions for kevinerrcode list
+//functions for kopenissue list
 //------------------------
 
-//initial for kevinerrcode_details_initial
-function kevinerrcode_details_initial() {
+//initial for kopenissue_details_initial
+function kopenissue_details_initial() {
 	//初始化模态窗口
 	kevin_ModelWnd = $("#details").kendoWindow({
 		//窗口的名字
-		title: "错误代码",
+		title: "开放问题",
 		//调整window的窗体位置 top为距离顶端距离，left为左边
 		position: {
 			left: "150px"
@@ -49,8 +49,8 @@ function kevinerrcode_details_initial() {
 	kevin_detailsTemplate = kendo.template($("#template").html());
 }
 
-//kevinerrcode 编辑界面的保存提交按钮 save
-function kevinerrcode_edit_submit(iId) {
+//kopenissue 编辑界面的保存提交按钮 save
+function kopenissue_edit_submit(iId) {
 	iId = Number(iId);
 	/*editOrApproval为true 就是审批页面过来的
 	否则就是编辑页面的*/
@@ -58,20 +58,20 @@ function kevinerrcode_edit_submit(iId) {
 	//获得输入框内project值
 	var dataForm = {};
 	dataForm.id = iId;
-	dataForm.project = $("input[name='kevinerrcode_project']").val();
-	dataForm.code = $("input[name='kevinerrcode_code']").val();
+	dataForm.project = $("input[name='kopenissue_project']").val();
+	dataForm.code = $("input[name='kopenissue_code']").val();
 	//获得输入框内name值
-	dataForm.name = $("input[name='kevinerrcode_name']").val();
+	dataForm.name = $("input[name='kopenissue_name']").val();
 	//获得输入框内nameEn值
-	dataForm.nameEn = $("input[name='kevinerrcode_nameEn']").val();
+	dataForm.nameEn = $("input[name='kopenissue_nameEn']").val();
 	//获得输入框内status值
-	dataForm.status = $("input[name='kevinerrcode_status']:checked").val();
+	dataForm.status = $("input[name='kopenissue_status']:checked").val();
 	//获得输入框内description值
-	dataForm.description = $("input[name='kevinerrcode_description']").val();
+	dataForm.description = $("input[name='kopenissue_description']").val();
 
 	var dataForm_approval = {};
 	dataForm_approval.id = iId;
-	dataForm_approval.status = $("input[name='kevinerrcode_status']:checked").val();
+	dataForm_approval.status = $("input[name='kopenissue_status']:checked").val();
 
 	//对输入的信息进行限制处理
 	if (!editOrApproval) {//审批的时候 因为无法编辑  所以不进行长度检测
@@ -93,7 +93,7 @@ function kevinerrcode_edit_submit(iId) {
 	} else {
 		fun = iId == '-1' ? 'create' : 'edit';
 	}
-	url = createLink("kevinerrcode", fun, "", 'json');
+	url = createLink("kopenissue", fun, "", 'json');
 	$.ajax({
 		type: 'POST',
 		url: url,
@@ -121,7 +121,7 @@ function kevinerrcode_edit_submit(iId) {
 			//模态隐藏
 			$('.k-overlay').css('display', 'none');
 			//新建完成以后，刷新表格
-			if (iId == '-1') kevinerrcode_list();
+			if (iId == '-1') kopenissue_list();
 		},
 		error: function (data) {
 			alert(data.responseText);//警告提示msg
@@ -131,7 +131,7 @@ function kevinerrcode_edit_submit(iId) {
 
 
 //编辑框点击事件
-function kevinerrcode_edit_Details(e) {
+function kopenissue_edit_Details(e) {
 	//e就是编辑按钮
 	e.preventDefault();
 
@@ -155,7 +155,7 @@ function kevinerrcode_edit_Details(e) {
 }
 
 //新建
-function kevinerrcode_create_Details() {
+function kopenissue_create_Details() {
 
 	// dataItem 为按钮所在的当前 行 元素
 
@@ -177,13 +177,13 @@ function kevinerrcode_create_Details() {
 	kevin_kendogrid_dataItem = dataItem;
 	kevin_ModelWnd.content(kevin_detailsTemplate(dataItem));
 	//在新建页面，隐藏日期和创建人tr
-	$("#kevinerrcode_date_hidden").css("display", "none");
+	$("#kopenissue_date_hidden").css("display", "none");
 	kevin_ModelWnd.open();
 
 }
 
 //审批
-function kevinerrcode_approval_Details(e) {
+function kopenissue_approval_Details(e) {
 	console.log(e);
 	console.log($(".k-grid-sign"));
 	var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
@@ -192,15 +192,15 @@ function kevinerrcode_approval_Details(e) {
 	kevin_kendogrid_dataItem = dataItem;
 	kevin_ModelWnd.content(kevin_detailsTemplate(dataItem));
 	//进入页面时候，直接选中开始的状态（100，200，300）
-	$("#kevinerrcode_status_approval").find("input[value=" + dataItem.status + "]").attr("checked", true);
+	$("#kopenissue_status_approval").find("input[value=" + dataItem.status + "]").attr("checked", true);
 	//如果状态码为200或者300  那么100不可选
 	if (dataItem.status == 200 || dataItem.status == 300) {
-		$("#kevinerrcode_status_approval").find("input[value=" + '100' + "]").attr("disabled", "disabled");
+		$("#kopenissue_status_approval").find("input[value=" + '100' + "]").attr("disabled", "disabled");
 	}
 	//隐藏状态
-	$("#kevinerrcode_status_edit").css("display", "none");
+	$("#kopenissue_status_edit").css("display", "none");
 	//显示单选按钮选项
-	$("#kevinerrcode_status_approval").removeAttr("style");
+	$("#kopenissue_status_approval").removeAttr("style");
 	//使所有input框不可编辑
 	$(".form-condensed").find("input[type=label]").attr("disabled", "disabled");
 
@@ -209,9 +209,9 @@ function kevinerrcode_approval_Details(e) {
 
 }
 
-//kevinerrcodeList
-function kevinerrcode_list() {
-	var url = createLink("kevinerrcode", "getList", '', 'json');
+//kopenissueList
+function kopenissue_list() {
+	var url = createLink("kopenissue", "getList", '', 'json');
 
 	//set colums,从g_ztModuleLang拿到字段名的翻译
 	kevin_kendogrid_columnsSets = [
@@ -220,25 +220,28 @@ function kevinerrcode_list() {
 				{
 					name: "edit",
 					text: "",
-					click: kevinerrcode_edit_Details
+					click: kopenissue_edit_Details
 				},
 				{
 					name: "sign",
 					text: "审批",
-					click: kevinerrcode_approval_Details,
+					click: kopenissue_approval_Details,
 					imageClass: "icon-task-finish icon-ok-sign"
 				}],
 			title: g_ztModuleLang["action"], width: "160px"
 		},
-		{field: "id", title: g_ztModuleLang["id"], width: 80},
-		{field: "code", title: g_ztModuleLang["code"]},
-		{field: "name", title: g_ztModuleLang["name"]},
-		{field: "nameEn", title: g_ztModuleLang["nameEn"]},
-		{field: "description", title: g_ztModuleLang["description"]},
-		{field: "project", title: g_ztModuleLang["project"], width: 100},
+		{field: "id", title: 'ID', width: 80},
+		{field: "group", width: 80},
+		{field: "project", title: g_ztModuleLang["project"], width: 80},
+		{field: "rootCause", title: g_ztModuleLang["rootCause"], width: 200},
+		{field: "description", title: g_ztModuleLang["description"], width: 100},
+		{field: "actions", title: g_ztModuleLang["actions"], width: 200},
+		{field: "raised",  width: 100},
+		{field: "deadline",  width: 100},
+		{field: "complete",  width: 100},
 		{field: "statusName", title: g_ztModuleLang["status"], width: 100},
-		{field: "createdBy", title: g_ztModuleLang["createdBy"], width: 100},
-		{field: "createdDate", title: g_ztModuleLang["createdDate"], width: 150}
+		{field: "assignedTo",  width: 100},
+		{field: "module", title: g_ztModuleLang["module"], width: 100}
 	];
 
 	//先清空显示
@@ -267,6 +270,6 @@ function kevinerrcode_list() {
 			item.statusName = g_ztModuleLang.statusList[item.status];
 		}
 		kevin_kendogrid_updateGridData();
-		$("#kevinerrcodeList_link").addClass('kevinerrcodeList_link')
+		$("#kopenissueList_link").addClass('kopenissueList_link')
 	});
 }

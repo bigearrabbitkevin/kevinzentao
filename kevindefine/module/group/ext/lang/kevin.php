@@ -61,12 +61,14 @@ $lang->resource->kevinerrcode->getList   = 'getList';
 $lang->resource->kevinerrcode->create = 'create';
 $lang->resource->kevinerrcode->edit   = 'edit';
 $lang->resource->kevinerrcode->delete = 'delete';
+$lang->resource->kevinerrcode->approve = 'approve';
 
 $lang->kevinerrcode->methodOrder[5]  = 'index';
 $lang->kevinerrcode->methodOrder[10] = 'create';
 $lang->kevinerrcode->methodOrder[15] = 'edit';
 $lang->kevinerrcode->methodOrder[25] = 'delete';
 $lang->kevinerrcode->methodOrder[30] = 'getList';
+$lang->kevinerrcode->methodOrder[30] = 'approve';
 
 //kevinchart------------------------------------------
 $lang->resource->kevinchart = new stdclass();

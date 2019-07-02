@@ -25,10 +25,13 @@ $lang->kevin->menu->kevinstore		 = array('link' => '仓库|kevinstore|itemlist',
 $lang->kevin->menu->kevinsvn		 = array('link' => 'SVN|kevinsvn|index', 'alias' => 'index,authz,account,statistic');
 $lang->kevin->menu->kevinclass		 = array('link' => '分类|kevinclass|index', 'alias' => 'book,help');
 $lang->kevin->menu->kevinuser		 = array('link' => '用户|kevinuser|classlist', 'alias' => 'index,classlist,recordlist,deptlist,defaultpwd,managepriv,domainaccount');
-$lang->kevin->menu->kevinerrcode		 = array('link' => '错误码|kevinerrcode|index', 'alias' => '');
+$lang->kevin->menu->kevinerrcode	 = array('link' => '错误码|kevinerrcode|index', 'alias' => '');
+$lang->kevin->menu->kopenissue		 = array('link' => '开放问题|kopenissue|index', 'alias' => '');
 
 $lang->kevin->menuOrder[5]	 = 'index';
 $lang->kevin->menuOrder[20]	 = 'kevindevice';
+$lang->kevin->menuOrder[26]  = 'kevinerrcode';
+$lang->kevin->menuOrder[26]  = 'kopenissue';
 $lang->kevin->menuOrder[30]	 = 'kevinsoft';
 $lang->kevin->menuOrder[40]	 = 'kevinstore';
 $lang->kevin->menuOrder[50]	 = 'kevincalendar';
@@ -37,7 +40,6 @@ $lang->kevin->menuOrder[70]	 = 'kevinchart';
 $lang->kevin->menuOrder[80]	 = 'kevinsvn';
 $lang->kevin->menuOrder[90]	 = 'kevinclass';
 $lang->kevin->menuOrder[100] = 'kevinuser';
-$lang->kevin->menuOrder[110]	 = 'kevinerrcode';
 
 //menugroup menu for kevincom----------------
 $lang->menugroup->kevinchart	 = 'kevincom';
@@ -51,6 +53,7 @@ $lang->menugroup->kevinstore	 = 'kevincom';
 $lang->menugroup->kevinuser		 = 'kevincom';
 $lang->menugroup->kevinlogin	 = 'kevincom';
 $lang->menugroup->kevinerrcode	 = 'kevincom';
+$lang->menugroup->kopenissue	 = 'kevincom';
 
 //menugroup menu ----------------
 $lang->menugroup->kevindefine	 = 'kevincom';
@@ -225,3 +228,10 @@ $lang->kevinuser->menuOrder[70]	 = 'defaultpwd';
 $lang->kevinuser->menuOrder[75]	 = 'managepriv';
 $lang->kevinuser->menuOrder[80]	 = 'domainaccount';
 
+//--Plugin------kopenissue------------------------------
+$lang->kopenissue		 = new stdclass();
+$lang->kopenissue->menu	 = new stdclass();
+
+//menu list
+$lang->kopenissue->menu->index	 = '开放问题|kopenissue|index';
+$lang->kopenissue->menuOrder[10]	 = 'index';

@@ -1,6 +1,6 @@
 <?php
 
-class kevinerrcode extends control {
+class kopenissue extends control {
 
 	public function __construct() {
 		parent::__construct();
@@ -14,7 +14,7 @@ class kevinerrcode extends control {
 	 */
 	public function create() {
 		$data = fixer::input('post')->get();
-		$ret = $this->kevinerrcode->create($data);
+		$ret = $this->kopenissue->create($data);
 		die(json_encode($ret));
 	}
 	
@@ -26,7 +26,7 @@ class kevinerrcode extends control {
 	 */
 	public function edit() {
 		$data =fixer::input('post')->get();
-		$ret = $this->kevinerrcode->update($data, true);//成功检出新数据
+		$ret = $this->kopenissue->update($data, true);//成功检出新数据
 		die(json_encode($ret));
 	}
 	
@@ -38,7 +38,7 @@ class kevinerrcode extends control {
 	 */
 	public function approve() {
 		$data = fixer::input('post')->get();
-		$ret = $this->kevinerrcode->approve($data);
+		$ret = $this->kopenissue->approve($data);
 		die(json_encode($ret));
 	}
 	/**
@@ -50,8 +50,8 @@ class kevinerrcode extends control {
 	public function index() {
 
 		/* The title and position. */
-		$this->view->title      = $this->lang->kevinerrcode->common.$this->lang->colon.$this->lang->kevinerrcode->index;
-		$this->view->position[] = $this->lang->kevinerrcode->index;
+		$this->view->title      = $this->lang->kopenissue->common.$this->lang->colon.$this->lang->kopenissue->index;
+		$this->view->position[] = $this->lang->kopenissue->index;
 
 		$this->display();
 	}
@@ -64,7 +64,7 @@ class kevinerrcode extends control {
 	 */
 	public function getList() {
 		$ret       = kevin_create_new_errcode();
-		$ret->data = $this->kevinerrcode->getList();
+		$ret->data = $this->kopenissue->getList();
 		if (dao::isError()) {
 			$ret->errcode = 15;
 			$ret->errmsg  = dao::getError(true);

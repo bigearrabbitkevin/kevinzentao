@@ -86,3 +86,14 @@ $config->objectTables['kv_ldapuser']        = TABLE_KEVIN_LDAPUSER;
 //db TABLE_KEVINERRCODE
 define('TABLE_KEVINERRCODE',          '`kv_errcode`');
 $config->objectTables['kevinerrcode']        = TABLE_KEVINERRCODE;
+
+
+//db kopenissue
+define('TABLE_KOPENISSUE_MEMBER',        '`kv_openissue_member`');
+define('TABLE_KOPENISSUE_ITEM',          '`kv_openissue_item`');
+define('TABLE_KOPENISSUE_GROUPUSER',     '`kv_openissue_groupuser`');
+define('TABLE_KOPENISSUE_GROUP',         '`kv_openissue_group`');
+$config->objectTables['openissuemember']        = kv_openissue_member;
+$config->objectTables['openissueitem']        = kv_openissue_item;
+$config->objectTables['openissuegroupuser']        = kv_openissue_groupuser;
+$config->objectTables['openissuegroup']        = kv_openissue_group;

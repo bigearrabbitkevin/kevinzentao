@@ -4,8 +4,13 @@ $lang->kevinerrcode->index   = '首页';
 $lang->kevinerrcode->getList = '列表';
 $lang->kevinerrcode->create  = '新增';
 $lang->kevinerrcode->edit    = '编辑';
+$lang->kevinerrcode->undo    = '恢复';
+$lang->kevinerrcode->approve = '审批';
 $lang->kevinerrcode->delete  = '删除';
 $lang->kevinerrcode->lists   = '列表';
+
+$lang->kevinerrcode->action  = '操作';
+$lang->kevinerrcode->publish = '发布';
 
 //字段翻译
 $lang->kevinerrcode->id       = '序号';
@@ -18,7 +23,7 @@ $lang->kevinerrcode->status   = '状态';
 $lang->kevinerrcode->createdBy   = '创建人';
 $lang->kevinerrcode->createdDate = '创建日期';
 $lang->kevinerrcode->description = '描述';
-$lang->kevinerrcode->action = '操作';
+
 
 $lang->kevinerrcode->statusList[100] = '草稿';
 $lang->kevinerrcode->statusList[200] = '发布';

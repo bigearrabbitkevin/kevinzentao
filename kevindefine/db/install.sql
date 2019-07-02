@@ -644,3 +644,54 @@ CREATE TABLE IF NOT EXISTS `kv_errcode` (
   KEY `name` (`name`) USING BTREE,
   KEY `nameEn` (`nameEn`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+-- ----------------------------
+-- Table structure for kv_openissue_group
+-- ----------------------------
+CREATE TABLE IF NOT EXISTS `kv_openissue_group` (
+  `id` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `account` varchar(255) DEFAULT NULL,
+  `assignedTo` varchar(255) DEFAULT NULL,
+  `dept` varchar(255) DEFAULT NULL,
+  `begin` varchar(255) DEFAULT NULL,
+  `desc` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for kv_openissue_groupuser
+-- ----------------------------
+CREATE TABLE IF NOT EXISTS `kv_openissue_groupuser` (
+  `group` varchar(255) DEFAULT NULL,
+  `account` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for kv_openissue_item
+-- ----------------------------
+CREATE TABLE IF NOT EXISTS `kv_openissue_item` (
+  `id` mediumint(11) NOT NULL AUTO_INCREMENT,
+  `group` mediumint(11) NOT NULL,
+  `project` mediumint(11) NOT NULL,
+  `module` varchar(50) NOT NULL,
+  `IssuesDescription` varchar(100) NOT NULL,
+  `rootCause` varchar(100) NOT NULL,
+  `actions` text,
+  `questionFrom` char(30) NOT NULL,
+  `raised` date NOT NULL,
+  `deadline` date NOT NULL,
+  `complete` date NOT NULL,
+  `responsibility` char(30) NOT NULL,
+  `status` float(3,0) NOT NULL DEFAULT '0',
+  `resolution` varchar(255) NOT NULL,
+  `assignedTo` char(30) NOT NULL,
+  UNIQUE KEY `id` (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for kv_openissue_member
+-- ----------------------------
+CREATE TABLE IF NOT EXISTS `kv_openissue_member` (
+  `group` varchar(255) DEFAULT NULL,
+  `account` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

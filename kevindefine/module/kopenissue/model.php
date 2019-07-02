@@ -1,6 +1,6 @@
 <?php
 
-class kevinerrcodeModel extends model {
+class kopenissueModel extends model {
 	/**
 	 * Construct function
 	 */
@@ -46,7 +46,7 @@ class kevinerrcodeModel extends model {
 		if ($ret->errcode>0) {
 			return $ret;
 		}
-		$this->dao->update(TABLE_KEVINERRCODE)->data($data)
+		$this->dao->update(TABLE_KOPENISSUE_ITEM)->data($data)
 			->where('id')->eq($data->id)
 			->autoCheck()
 			->exec();
@@ -91,7 +91,7 @@ class kevinerrcodeModel extends model {
 			return $ret;
 		}
 
-		$this->dao->insert(TABLE_KEVINERRCODE)->data($data)
+		$this->dao->insert(TABLE_KOPENISSUE_ITEM)->data($data)
 			->autoCheck()
 			->check('code','unique')
 			->exec();
@@ -112,7 +112,7 @@ class kevinerrcodeModel extends model {
 	 * @return id
 	 */
 	public function getById($iID) {
-		return $this->dao->findById((int) $iID)->from(TABLE_KEVINERRCODE)->fetch();
+		return $this->dao->findById((int) $iID)->from(TABLE_KOPENISSUE_ITEM)->fetch();
 	}
 	
 	/**
@@ -122,7 +122,7 @@ class kevinerrcodeModel extends model {
 	 * @return list
 	 */
 	public function getList() {
-		return $this->dao->select('*')->from(TABLE_KEVINERRCODE)
+		return $this->dao->select('*')->from(TABLE_KOPENISSUE_ITEM)
 			->fetchAll();
 	}
 	
@@ -182,7 +182,7 @@ class kevinerrcodeModel extends model {
 		}
 		//Update
 		try{
-			$this->dao->update(TABLE_KEVINERRCODE)->data($data)
+			$this->dao->update(TABLE_KOPENISSUE_ITEM)->data($data)
 			->where('id')->eq($id)
 			->autoCheck()
 			->exec();	

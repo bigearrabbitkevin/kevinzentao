@@ -1,6 +1,6 @@
 <?php
 
-class kevinerrcodeModel extends model {
+class kerrcodeModel extends model {
 	/**
 	 * Construct function
 	 */
@@ -29,8 +29,8 @@ class kevinerrcodeModel extends model {
 		$data->status = (isset($iData->status))?trim($iData->status):0;
 		$data->status = intval($data->status);
 		$data->id = intval($data->id);
-		
-		$oldItem = $this->getById($ret->data->id);;
+
+		$oldItem = $this->getById($data->id);;
 		$ret->data = $data;
 		//检查是否需要修改
 		if($data->id <1){
@@ -39,7 +39,7 @@ class kevinerrcodeModel extends model {
 		}else if($data->status != 200 && $data->status != 300){
 			$ret->errcode = 11;
 			$ret->errmsg  = 'status only can change to 200 or 300';
-		}else if($data->status == $oldItem.status){
+		}else if($data->status == $oldItem->status){
 			$ret->errcode = 11;
 			$ret->errmsg  = 'status is same';
 		}

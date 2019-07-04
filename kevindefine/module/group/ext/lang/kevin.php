@@ -54,21 +54,21 @@ $lang->kevincalendar->methodOrder[50] = 'logdeleteall';
 $lang->kevincalendar->methodOrder[55] = 'logdeletesql';
 
 
-//kevinerrcode------------------------------------------
-$lang->resource->kevinerrcode         = new stdclass();
-$lang->resource->kevinerrcode->index  = 'index';
-$lang->resource->kevinerrcode->getList   = 'getList';
-$lang->resource->kevinerrcode->create = 'create';
-$lang->resource->kevinerrcode->edit   = 'edit';
-$lang->resource->kevinerrcode->delete = 'delete';
-$lang->resource->kevinerrcode->approve = 'approve';
+//kerrcode------------------------------------------
+$lang->resource->kerrcode          = new stdclass();
+$lang->resource->kerrcode->index   = 'index';
+$lang->resource->kerrcode->getList = 'getList';
+$lang->resource->kerrcode->create  = 'create';
+$lang->resource->kerrcode->edit    = 'edit';
+$lang->resource->kerrcode->delete  = 'delete';
+$lang->resource->kerrcode->approve = 'approve';
 
-$lang->kevinerrcode->methodOrder[5]  = 'index';
-$lang->kevinerrcode->methodOrder[10] = 'create';
-$lang->kevinerrcode->methodOrder[15] = 'edit';
-$lang->kevinerrcode->methodOrder[25] = 'delete';
-$lang->kevinerrcode->methodOrder[30] = 'getList';
-$lang->kevinerrcode->methodOrder[30] = 'approve';
+$lang->kerrcode->methodOrder[5]  = 'index';
+$lang->kerrcode->methodOrder[10] = 'create';
+$lang->kerrcode->methodOrder[15] = 'edit';
+$lang->kerrcode->methodOrder[25] = 'delete';
+$lang->kerrcode->methodOrder[30] = 'getList';
+$lang->kerrcode->methodOrder[35] = 'approve';
 
 //kevinchart------------------------------------------
 $lang->resource->kevinchart = new stdclass();
@@ -363,3 +363,20 @@ $lang->kevinlogin->methodOrder[20] = 'unlock';
 $lang->kevinlogin->methodOrder[25] = 'managepriv';
 $lang->kevinlogin->methodOrder[30] = 'domainaccount';
 $lang->kevinlogin->methodOrder[35] = 'deleteldapuser';
+
+
+//kopenissue------------------------------------------
+$lang->resource->kopenissue          = new stdclass();
+$lang->resource->kopenissue->index   = 'index';
+$lang->resource->kopenissue->getList = 'getList';
+$lang->resource->kopenissue->create  = 'create';
+$lang->resource->kopenissue->edit    = 'edit';
+$lang->resource->kopenissue->delete  = 'delete';
+$lang->resource->kopenissue->approve = 'approve';
+
+$lang->kopenissue->methodOrder[5]  = 'index';
+$lang->kopenissue->methodOrder[10] = 'create';
+$lang->kopenissue->methodOrder[15] = 'edit';
+$lang->kopenissue->methodOrder[25] = 'delete';
+$lang->kopenissue->methodOrder[30] = 'getList';
+$lang->kopenissue->methodOrder[30] = 'approve';
